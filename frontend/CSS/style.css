@@ -1,0 +1,11 @@
+#headerTitle {
+    font-size: 24px;
+}
+
+#headerList li {
+    font-size: 18px;
+}
+
+#newAppointmentModal {
+    display: none;
+}
