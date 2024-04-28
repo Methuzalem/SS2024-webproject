@@ -1,3 +1,7 @@
+body{
+    width: 100%;
+}
+
 #headerTitle {
     font-size: 24px;
 }
@@ -6,6 +10,20 @@
     font-size: 18px;
 }
 
-#newAppointmentModal {
-    display: none;
+#modalHeader {
+    background-color: black;
+    color: white;
+    font-size: 18px;
+}
+
+.thickLabel{
+    font-weight: bold;
+}
+
+#appointmentList {
+    list-style: none;
+}
+
+.appointment {
+    border: 1px solid black;
 }

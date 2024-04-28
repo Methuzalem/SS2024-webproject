@@ -10,7 +10,7 @@
 
 </head>
 <body>
-    <header id="header" class="p-3 bg-black">
+    <header id="header" class="p-3 bg-black mb-4">
         <div class="containter">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                 <h1 id="headerTitle" class="me-lg-5 d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
@@ -18,7 +18,7 @@
                 </h1>
                 <ul id="headerList" class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                     <li>
-                        <button id="newAppointment" class="nav-link px-2 btn-primary btn-outline-light text-white">
+                        <button id="newAppointment" data-bs-toggle="modal" data-bs-target="#newAppointmentModal" class="nav-link px-2 btn-primary btn-outline-light text-white">
                             New Appointment
                         </button>
                     </li>
@@ -28,46 +28,72 @@
     </header>
 
     <div id="main" class="row col">
-        <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="newAppointmentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Modal Title</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-content">
+                    <div class="modal-header" id="modalHeader">
+                        <h5 class="modal-title" id="exampleModalLabel">Create a new Appointment</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="newTitle" class="form-label thickLabel">Title:</label>
+                            <input type="text" id="newTitle" class="form-control border border-dark">
+                        </div>
+                        <div class="mb-3">
+                            <label for="newName" class="form-label thickLabel">Name:</label>
+                            <input type="text" id="newName" class="form-control border border-dark">
+                        </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-dark">Save changes</button>
+                    </div>
                 </div>
-                <div class="modal-body">
-                  <p>Modal content goes here...</p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-              </div>
             </div>
-          </div>
-        <ul id="appointmentList">
-            <li>
-                <div>
-                    Temp 1
-                </div>
-            </li>
-            <li>
-                <div>
-                    Temp 2
-                </div>
-            </li>
-            <li>
-                <div>
-                    Temp 3
-                    Date:
-                </div>
-            </li>
-        </ul>
+        </div>
+        
+        <div>
+            <ul class="nav col-12 col-md-auto me-md-auto mb-2 justify-content-center mb-md-0">
+                <li class="navbar-item">
+                    <div>
+                        <div>
+                            Title
+                        </div>
+                        <div>
+                            Date:
+                        </div>
+                        <div>
+                            Name:
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
 
-    <div id="footer" class="row col">
-        <div id="footerDate">
-            SS-2024
+    <div class="modal fade" id="appointmentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header" id="modalHeader">
+                    <h5 class="modal-title" id="exampleModalLabel">Create a new Appointment</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="newTitle" class="form-label thickLabel">Title:</label>
+                        <input type="text" id="newTitle" class="form-control border border-dark">
+                    </div>
+                    <div class="mb-3">
+                        <label for="newName" class="form-label thickLabel">Name:</label>
+                        <input type="text" id="newName" class="form-control border border-dark">
+                    </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-dark">Save changes</button>
+                </div>
+            </div>
         </div>
     </div>
 
