@@ -28,20 +28,20 @@
     </header>
 
     <div id="main" class="row col">
-        <div class="modal fade" id="newAppointmentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="newAppointmentModal" tabindex="-1" aria-labelledby="newAppointmentModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header" id="modalHeader">
-                        <h5 class="modal-title" id="exampleModalLabel">Create a new Appointment</h5>
+                        <h5 class="modal-title" id="newAppointmentModalLabel">Create a new Appointment</h5>
                     </div>
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="newTitle" class="form-label thickLabel">Title:</label>
-                            <input type="text" id="newTitle" class="form-control border border-dark">
+                            <input type="text" id="newTitle" class="form-control border-dark">
                         </div>
                         <div class="mb-3">
                             <label for="newName" class="form-label thickLabel">Name:</label>
-                            <input type="text" id="newName" class="form-control border border-dark">
+                            <input type="text" id="newName" class="form-control border-dark">
                         </div>
                         </form>
                     </div>
@@ -53,39 +53,50 @@
             </div>
         </div>
         
-        <div>
-            <ul class="nav col-12 col-md-auto me-md-auto mb-2 justify-content-center mb-md-0">
-                <li class="navbar-item">
+        <div class="container">
+            <ul class="list-group ms-3">
+                <li class="list-group-item border-dark" data-bs-toggle="modal" data-bs-target="#appointmentModal">
                     <div>
-                        <div>
-                            Title
-                        </div>
-                        <div>
-                            Date:
-                        </div>
-                        <div>
-                            Name:
-                        </div>
+                        Titel
+                    </div>
+                    <div>
+                        Ablaufdatum
+                    </div>
+                </li>
+                <li class="list-group-item border-dark" data-bs-toggle="modal" data-bs-target="#appointmentModal">
+                    <div>
+                        Titel
+                    </div>
+                    <div>
+                        Ablaufdatum
+                    </div>
+                </li>
+                <li class="list-group-item border-dark" data-bs-toggle="modal" data-bs-target="#appointmentModal">
+                    <div>
+                        Titel
+                    </div>
+                    <div>
+                        Ablaufdatum
                     </div>
                 </li>
             </ul>
         </div>
     </div>
 
-    <div class="modal fade" id="appointmentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="appointmentModal" tabindex="-1" aria-labelledby="appointmentModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header" id="modalHeader">
-                    <h5 class="modal-title" id="exampleModalLabel">Create a new Appointment</h5>
+                    <h5 class="modal-title" id="appointmentModalLabel">Title</h5>
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="newTitle" class="form-label thickLabel">Title:</label>
-                        <input type="text" id="newTitle" class="form-control border border-dark">
+                        <input type="text" id="newTitle" class="form-control border-dark">
                     </div>
                     <div class="mb-3">
                         <label for="newName" class="form-label thickLabel">Name:</label>
-                        <input type="text" id="newName" class="form-control border border-dark">
+                        <input type="text" id="newName" class="form-control border-dark">
                     </div>
                     </form>
                 </div>
