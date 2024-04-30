@@ -14,23 +14,46 @@ function clearNew() {
     newDuration.value = "";
     newDate.value = "";
 }
-function fetchData() {
-    console.log("test");
-    var xhr = new XMLHttpRequest();
-    var url = "../backend/JSON/Appointments.json";
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                var jsonData = JSON.parse(xhr.responseText);
+/*
+function fetchData()
+{
+    let xhr: XMLHttpRequest = new XMLHttpRequest();
+    const url: string = "../backend/JSON/Appointments.json";
+
+    xhr.onreadystatechange = function()
+    {
+        if (xhr.readyState === XMLHttpRequest.DONE)
+        {
+            if (xhr.status === 200)
+            {
+                const jsonData: any = JSON.parse(xhr.responseText);
                 console.log("Data received:", jsonData);
             }
-            else {
+            else
+            {
                 console.error("Error loading JSON file:", xhr.statusText);
             }
         }
-    };
+    }
+
     xhr.open("GET", url, true);
     xhr.send;
+}*/
+function fetchAgain() {
+    console.log("test");
+    fetch("../backend/JSON/Appointments.json")
+        .then(function (response) {
+        if (!response.ok) {
+            throw new Error("Netzwerkantwort war nicht ok");
+        }
+        return response.json();
+    })
+        .then(function (data) {
+        console.log(data);
+    })
+        .catch(function (error) {
+        console.error("Fehler beim Laden der JSON-Datei:", error);
+    });
 }
 function createNewAppointment() {
     clearNew();
@@ -42,5 +65,6 @@ newSave === null || newSave === void 0 ? void 0 : newSave.addEventListener("clic
     createNewAppointment();
 });
 document.addEventListener("DOMContentLoaded", function () {
-    fetchData();
+    //fetch("../backend/servicehandlder.php");
+    fetchAgain();
 });
