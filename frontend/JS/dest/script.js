@@ -1,27 +1,39 @@
 "use strict";
 var newClose = document.getElementById("newClose");
 var newSave = document.getElementById("newSave");
-var listTitle = document.getElementById("listTitle");
-var listDuration = document.getElementById("listDuration");
-var listDate = document.getElementById("listDate");
 var newTitle = document.getElementById("newTitle");
 var newDuration = document.getElementById("newDuration");
 var newDate = document.getElementById("newDate");
+var listTitle = document.getElementById("listTitle");
+var listDuration = document.getElementById("listDuration");
+var listDate = document.getElementById("listDate");
 var list = document.getElementById("list");
-var listElement = "<li class=\"list-group-item border-dark\" data-bs-toggle=\"modal\" data-bs-target=\"#appointmentModal\"></li>";
+var div = document.createElement("div");
 function clearNew() {
     newTitle.value = "";
     newDuration.value = "";
     newDate.value = "";
 }
-function appendListElement() {
-    list.innerHTML = listElement;
-}
-function appendAppointmentData() {
+function fetchData() {
+    var xhr = new XMLHttpRequest();
+    var url = ".../backend/JSON/Appointments.json";
+    xhr.onreadystatechange = function () {
+        console.log();
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                var jsonData = JSON.parse(xhr.responseText);
+                console.log("Data received:", jsonData);
+            }
+            else {
+                console.error("Error loading JSON file:", xhr.statusText);
+            }
+        }
+        else {
+            console.error("Error loading JSON file");
+        }
+    };
 }
 function createNewAppointment() {
-    appendListElement();
-    appendAppointmentData();
     clearNew();
 }
 newClose === null || newClose === void 0 ? void 0 : newClose.addEventListener("click", function () {
@@ -30,3 +42,4 @@ newClose === null || newClose === void 0 ? void 0 : newClose.addEventListener("c
 newSave === null || newSave === void 0 ? void 0 : newSave.addEventListener("click", function () {
     createNewAppointment();
 });
+document.addEventListener("DOMContentLoaded", fetchData);
