@@ -9,21 +9,16 @@ var listDuration = document.getElementById("listDuration");
 var listDate = document.getElementById("listDate");
 var list = document.getElementById("list");
 var div = document.createElement("div");
-//create JSON-files on load
-document.addEventListener('DOMContentLoaded', function () {
-    fetch('../backend/servicehandler.php');
-    fetchData();
-});
 function clearNew() {
     newTitle.value = "";
     newDuration.value = "";
     newDate.value = "";
 }
 function fetchData() {
+    console.log("test");
     var xhr = new XMLHttpRequest();
-    var url = ".../backend/JSON/Appointments.json";
+    var url = "../backend/JSON/Appointments.json";
     xhr.onreadystatechange = function () {
-        console.log();
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status === 200) {
                 var jsonData = JSON.parse(xhr.responseText);
@@ -33,10 +28,9 @@ function fetchData() {
                 console.error("Error loading JSON file:", xhr.statusText);
             }
         }
-        else {
-            console.error("Error loading JSON file");
-        }
     };
+    xhr.open("GET", url, true);
+    xhr.send;
 }
 function createNewAppointment() {
     clearNew();
@@ -46,4 +40,7 @@ newClose === null || newClose === void 0 ? void 0 : newClose.addEventListener("c
 });
 newSave === null || newSave === void 0 ? void 0 : newSave.addEventListener("click", function () {
     createNewAppointment();
+});
+document.addEventListener("DOMContentLoaded", function () {
+    fetchData();
 });
