@@ -14,34 +14,8 @@ function clearNew() {
     newDuration.value = "";
     newDate.value = "";
 }
-/*
-function fetchData()
-{
-    let xhr: XMLHttpRequest = new XMLHttpRequest();
-    const url: string = "../backend/JSON/Appointments.json";
-
-    xhr.onreadystatechange = function()
-    {
-        if (xhr.readyState === XMLHttpRequest.DONE)
-        {
-            if (xhr.status === 200)
-            {
-                const jsonData: any = JSON.parse(xhr.responseText);
-                console.log("Data received:", jsonData);
-            }
-            else
-            {
-                console.error("Error loading JSON file:", xhr.statusText);
-            }
-        }
-    }
-
-    xhr.open("GET", url, true);
-    xhr.send;
-}*/
-function fetchAgain() {
-    console.log("test");
-    fetch("../backend/JSON/Appointments.json")
+function fetchData(url) {
+    fetch(url)
         .then(function (response) {
         if (!response.ok) {
             throw new Error("Netzwerkantwort war nicht ok");
@@ -64,7 +38,7 @@ newClose === null || newClose === void 0 ? void 0 : newClose.addEventListener("c
 newSave === null || newSave === void 0 ? void 0 : newSave.addEventListener("click", function () {
     createNewAppointment();
 });
-document.addEventListener("DOMContentLoaded", function () {
-    //fetch("../backend/servicehandlder.php");
-    fetchAgain();
+document.addEventListener('DOMContentLoaded', function () {
+    fetch('../backend/servicehandler.php');
+    fetchData("../backend/JSON/Appointments.json");
 });
