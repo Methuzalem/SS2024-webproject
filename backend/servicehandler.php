@@ -26,7 +26,7 @@ if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
         $data[] = $row;
     }
-    $json = json_encode($data, JSON_PRETTY_PRINT);  // JSON_PRETTY_PRINT für schön formatierten JSON-Text
+    $json = json_encode($data, JSON_PRETTY_PRINT); 
 
     file_put_contents('JSON/Appointments.json', $json);
 
@@ -44,7 +44,7 @@ if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
         $data[] = $row;
     }
-    $json = json_encode($data, JSON_PRETTY_PRINT);  // JSON_PRETTY_PRINT für schön formatierten JSON-Text
+    $json = json_encode($data, JSON_PRETTY_PRINT); 
 
     file_put_contents('JSON/User.json', $json);
 
@@ -62,7 +62,7 @@ if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
         $data[] = $row;
     }
-    $json = json_encode($data, JSON_PRETTY_PRINT);  // JSON_PRETTY_PRINT für schön formatierten JSON-Text
+    $json = json_encode($data, JSON_PRETTY_PRINT); 
 
     file_put_contents('JSON/Votes.json', $json);
 
