@@ -1,21 +1,16 @@
 const newClose = document.getElementById("newClose") as HTMLInputElement;
 const newSave  = document.getElementById("newSave")  as HTMLInputElement;
 
-const listTitle    = document.getElementById("listTitle")    as HTMLInputElement;
-const listDuration = document.getElementById("listDuration") as HTMLInputElement;
-const listDate     = document.getElementById("listDate")     as HTMLInputElement;
-
 const newTitle    = document.getElementById("newTitle")    as HTMLInputElement;
 const newDuration = document.getElementById("newDuration") as HTMLInputElement;
 const newDate     = document.getElementById("newDate")     as HTMLInputElement;
 
-const list        = document.getElementById("list") as HTMLDataListElement;
-const listElement = "<li class=\"list-group-item border-dark\" data-bs-toggle=\"modal\" data-bs-target=\"#appointmentModal\"></li>";
+const listTitle    = document.getElementById("listTitle")    as HTMLInputElement;
+const listDuration = document.getElementById("listDuration") as HTMLInputElement;
+const listDate     = document.getElementById("listDate")     as HTMLInputElement;
 
-//create JSON-files on load
-document.addEventListener('DOMContentLoaded', function () {
-    fetch('../backend/servicehandler.php');
-});
+const list = document.getElementById("list") as HTMLDataListElement;
+const div  = document.createElement("div");
 
 function clearNew()
 {
@@ -24,20 +19,25 @@ function clearNew()
     newDate.value = "";
 }
 
-function appendListElement()
+function fetchData(url: string)
 {
-    list.innerHTML = listElement;
-}
-
-function appendAppointmentData()
-{
-    
+    fetch(url)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Netzwerkantwort war nicht ok");
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data);
+    })
+    .catch(error => {
+        console.error("Fehler beim Laden der JSON-Datei:", error);
+    });
 }
 
 function createNewAppointment() 
 {
-    appendListElement();
-    appendAppointmentData();
     clearNew();
 }
 
@@ -48,3 +48,8 @@ newClose?.addEventListener("click", () => {
 newSave?.addEventListener("click", () => {
     createNewAppointment();
 })
+
+document.addEventListener('DOMContentLoaded', function () {
+    fetch('../backend/servicehandler.php');
+    fetchData("../backend/JSON/Appointments.json");
+});
