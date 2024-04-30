@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 26. Apr 2024 um 00:03
+-- Erstellungszeit: 30. Apr 2024 um 13:47
 -- Server-Version: 10.4.28-MariaDB
 -- PHP-Version: 8.2.4
 
@@ -53,9 +53,38 @@ CREATE TABLE `user` (
   `user_ID` int(11) NOT NULL,
   `username` varchar(64) NOT NULL,
   `email` varchar(64) NOT NULL,
-  `comments` text NOT NULL,
-  `appointments` text NOT NULL
+  `appointments` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Daten für Tabelle `user`
+--
+
+INSERT INTO `user` (`user_ID`, `username`, `email`, `appointments`) VALUES
+(7, 'Testuser 1', 'user1@gmail.com', 1),
+(8, 'Testuser 2', 'user2@gmail.com', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `votes`
+--
+
+CREATE TABLE `votes` (
+  `vote_ID` int(11) NOT NULL,
+  `user_ID` int(11) NOT NULL,
+  `comment` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Daten für Tabelle `votes`
+--
+
+INSERT INTO `votes` (`vote_ID`, `user_ID`, `comment`) VALUES
+(3, 7, 'This is the first comment from Testuser 1.'),
+(4, 7, 'This is the second comment from Testuser 1.'),
+(7, 8, 'This is the first comment from Testuser 2.'),
+(8, 8, 'This is the second comment from Testuser 2.');
 
 --
 -- Indizes der exportierten Tabellen
@@ -71,7 +100,15 @@ ALTER TABLE `appointments`
 -- Indizes für die Tabelle `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`user_ID`);
+  ADD PRIMARY KEY (`user_ID`),
+  ADD KEY `appointments` (`appointments`);
+
+--
+-- Indizes für die Tabelle `votes`
+--
+ALTER TABLE `votes`
+  ADD PRIMARY KEY (`vote_ID`),
+  ADD KEY `user_ID` (`user_ID`);
 
 --
 -- AUTO_INCREMENT für exportierte Tabellen
@@ -87,7 +124,29 @@ ALTER TABLE `appointments`
 -- AUTO_INCREMENT für Tabelle `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT für Tabelle `votes`
+--
+ALTER TABLE `votes`
+  MODIFY `vote_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- Constraints der exportierten Tabellen
+--
+
+--
+-- Constraints der Tabelle `user`
+--
+ALTER TABLE `user`
+  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`appointments`) REFERENCES `appointments` (`Appo_ID`);
+
+--
+-- Constraints der Tabelle `votes`
+--
+ALTER TABLE `votes`
+  ADD CONSTRAINT `votes_ibfk_2` FOREIGN KEY (`user_ID`) REFERENCES `user` (`user_ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -1,0 +1,22 @@
+[
+    {
+        "vote_ID": "3",
+        "user_ID": "7",
+        "comment": "This is the first comment from Testuser 1."
+    },
+    {
+        "vote_ID": "4",
+        "user_ID": "7",
+        "comment": "This is the second comment from Testuser 1."
+    },
+    {
+        "vote_ID": "7",
+        "user_ID": "8",
+        "comment": "This is the first comment from Testuser 2."
+    },
+    {
+        "vote_ID": "8",
+        "user_ID": "8",
+        "comment": "This is the second comment from Testuser 2."
+    }
+]
