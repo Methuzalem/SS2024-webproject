@@ -12,6 +12,11 @@ const newDate     = document.getElementById("newDate")     as HTMLInputElement;
 const list        = document.getElementById("list") as HTMLDataListElement;
 const listElement = "<li class=\"list-group-item border-dark\" data-bs-toggle=\"modal\" data-bs-target=\"#appointmentModal\"></li>";
 
+//create JSON-files on load
+document.addEventListener('DOMContentLoaded', function () {
+    fetch('../backend/servicehandler.php');
+});
+
 function clearNew()
 {
     newTitle.value = "";

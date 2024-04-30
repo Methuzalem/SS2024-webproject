@@ -1,4 +1,3 @@
-"use strict";
 var newClose = document.getElementById("newClose");
 var newSave = document.getElementById("newSave");
 var listTitle = document.getElementById("listTitle");
@@ -9,6 +8,10 @@ var newDuration = document.getElementById("newDuration");
 var newDate = document.getElementById("newDate");
 var list = document.getElementById("list");
 var listElement = "<li class=\"list-group-item border-dark\" data-bs-toggle=\"modal\" data-bs-target=\"#appointmentModal\"></li>";
+//create JSON-files on load
+document.addEventListener('DOMContentLoaded', function () {
+    fetch('../backend/servicehandler.php');
+});
 function clearNew() {
     newTitle.value = "";
     newDuration.value = "";
