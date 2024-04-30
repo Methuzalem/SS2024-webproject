@@ -9,6 +9,11 @@ var listDuration = document.getElementById("listDuration");
 var listDate = document.getElementById("listDate");
 var list = document.getElementById("list");
 var div = document.createElement("div");
+//create JSON-files on load
+document.addEventListener('DOMContentLoaded', function () {
+    fetch('../backend/servicehandler.php');
+    fetchData();
+});
 function clearNew() {
     newTitle.value = "";
     newDuration.value = "";
@@ -42,4 +47,3 @@ newClose === null || newClose === void 0 ? void 0 : newClose.addEventListener("c
 newSave === null || newSave === void 0 ? void 0 : newSave.addEventListener("click", function () {
     createNewAppointment();
 });
-document.addEventListener("DOMContentLoaded", fetchData);

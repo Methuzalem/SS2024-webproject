@@ -12,6 +12,12 @@ const listDate     = document.getElementById("listDate")     as HTMLInputElement
 const list = document.getElementById("list") as HTMLDataListElement;
 const div  = document.createElement("div");
 
+//create JSON-files on load
+document.addEventListener('DOMContentLoaded', function () {
+    fetch('../backend/servicehandler.php');
+    fetchData();
+});
+
 function clearNew()
 {
     newTitle.value = "";
@@ -58,5 +64,3 @@ newClose?.addEventListener("click", () => {
 newSave?.addEventListener("click", () => {
     createNewAppointment();
 })
-
-document.addEventListener("DOMContentLoaded", fetchData);
