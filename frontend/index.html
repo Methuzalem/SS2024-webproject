@@ -40,12 +40,20 @@
                                 <input type="text" id="newTitle" class="form-control border-dark">
                             </div>
                             <div>
-                                <label for="newDuration" class="form-label thickLabel">Appointment duration(hours)</label>
-                                <input type="text" id="newDuration" class="form-control border-dark">
+                                <label for="newDate" class="form-label thickLabel">Appointment date</label>
+                                <input type="date" id="newDate" class="form-control border-dark">
                             </div>
                             <div>
-                                <label for="newDate" class="form-label thickLabel">Appointment expiry date</label>
-                                <input type="text" id="newDate" class="form-control border-dark">
+                                <label for="newTime" class="form-label thickLabel">Starting Time</label>
+                                <input type="time" id="newTime" class="form-control border-dark">
+                            </div>
+                            <div>
+                                <label for="newDuration" class="form-label thickLabel">Duration</label>
+                                <input type="time" id="newDuration" class="form-control border-dark">
+                            </div>
+                            <div>
+                                <label for="newLocation" class="form-label thickLabel">Location</label>
+                                <input type="text" id="newLocation" class="form-control border-dark">
                             </div>
                             </form>
                         </div>
@@ -60,60 +68,6 @@
             <div class="container">
                 <ul class="list-group ms-3" id="list">
                 </ul>
-            </div>
-        </div>
-
-        <div class="modal fade" id="appointmentModal" tabindex="-1" aria-labelledby="appointmentModalTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header" id="modalHeader">
-                        <h5 class="modal-title" id="appointmentModalTitle">Title</h5>
-                    </div>
-                    <div class="modal-body">
-                        <div>
-                            <label for="appointmentName" class="form-label thickLabel">Name</label>
-                            <input type="text" id="appointmentName" class="form-control border-dark">
-                        </div>
-                        <div>
-                            <label for="appointmentDate" class="form-label thickLabel">Date</label>
-                            <input type="date" id="appointmentDate" class="form-control border-dark">
-                        </div>
-                        <div>
-<<<<<<< HEAD
-                        <div>
-                            <label for="newLocation" class="form-label thickLabel">Location</label>
-                            <input type="text" id="newLocation" class="form-control border-dark">
-                        </div>
-                        <div>
-                            <label for="newDate" class="form-label thickLabel">Date</label>
-                            <input type="date" id="newDate" class="form-control border-dark">
-                        </div>
-                        <div>
-                            <label for="newTime" class="form-label thickLabel">Start Time</label>
-                            <input type="time" id="newTime" class="form-control border-dark">
-=======
-                            <label for="appointmentTime" class="form-label thickLabel">Time</label>
-                            <input type="time" id="appointmentTime" class="form-control border-dark">
-                        </div>
-                        <div>
-                            <label for="appointmentDuration" class="form-label thickLabel">Duration</label>
-                            <input type="text" id="appointmentDuration" class="form-control border-dark" readonly>
-                        </div>
-                        <div>
-                            <label for="appointmentComment" class="form-label thickLabel">Comment</label>
-                            <input type="text" id="appointmentComment" class="form-control border-dark">
-                        </div>
-                        <div>
-                            <label for="appointmentDate" class="form-label thickLabel">Date</label>
-                            <input type="text" id="appointmentDate" class="form-control border-dark" readonly>
->>>>>>> 679d4548693f936c8f88f2ad69dd2d1530c8841a
-                        </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </div>
             </div>
         </div>
 
