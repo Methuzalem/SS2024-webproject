@@ -1,3 +1,4 @@
+"use strict";
 var newClose = document.getElementById("newClose");
 var newSave = document.getElementById("newSave");
 var newTitle = document.getElementById("newTitle");
