@@ -4,7 +4,7 @@
         "title": "test1",
         "duration": "0",
         "location": "adawd",
-        "date": "0",
+        "date": "12.05.2024",
         "expired": "0"
     },
     {
@@ -12,7 +12,7 @@
         "title": "test2",
         "duration": "0",
         "location": "Zu Hause",
-        "date": "0",
+        "date": "12.05.2023",
         "expired": "0"
     },
     {
@@ -20,7 +20,7 @@
         "title": "geburtstag",
         "duration": "0",
         "location": "Zu Hause",
-        "date": "0",
+        "date": "12.05.2024",
         "expired": "0"
     },
     {
@@ -28,7 +28,7 @@
         "title": "Marvins Erfolg",
         "duration": "8",
         "location": "DAHAM",
-        "date": "0",
+        "date": "12.05.2024",
         "expired": "0"
     },
     {
@@ -36,7 +36,7 @@
         "title": "aaaaa",
         "duration": "12",
         "location": "121212",
-        "date": "12",
+        "date": "12.05.2023",
         "expired": "0"
     },
     {
@@ -44,7 +44,7 @@
         "title": "wadaw",
         "duration": "0",
         "location": "121212",
-        "date": "0",
+        "date": "12.05.2023",
         "expired": "0"
     },
     {
@@ -52,7 +52,7 @@
         "title": "awdawd",
         "duration": "3",
         "location": "12113adasda",
-        "date": "1212",
+        "date": "12.05.2023",
         "expired": "0"
     }
 ]
