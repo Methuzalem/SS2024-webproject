@@ -1,4 +1,3 @@
-"use strict";
 var newClose = document.getElementById("newClose");
 var newSave = document.getElementById("newSave");
 var newTitle = document.getElementById("newTitle");
@@ -86,6 +85,10 @@ newClose === null || newClose === void 0 ? void 0 : newClose.addEventListener("c
 newSave === null || newSave === void 0 ? void 0 : newSave.addEventListener('click', function () {
     sendData('../backend/logic/appocreation.php');
     clearNew();
+    fetch('../backend/servicehandler.php', {
+        method: "POST"
+    });
+    fetchData("../backend/JSON/Appointments.json");
 });
 document.addEventListener('DOMContentLoaded', function () {
     fetch('../backend/servicehandler.php');
