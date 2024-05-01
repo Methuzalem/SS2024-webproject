@@ -1,7 +1,7 @@
 [
     {
         "Appo_ID": "4",
-        "title": "",
+        "title": "test1",
         "duration": "0",
         "location": "adawd",
         "date": "0",
@@ -9,7 +9,7 @@
     },
     {
         "Appo_ID": "5",
-        "title": "",
+        "title": "test2",
         "duration": "0",
         "location": "Zu Hause",
         "date": "0",
@@ -17,7 +17,7 @@
     },
     {
         "Appo_ID": "6",
-        "title": "",
+        "title": "geburtstag",
         "duration": "0",
         "location": "Zu Hause",
         "date": "0",

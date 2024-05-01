@@ -2,17 +2,12 @@ const newClose = document.getElementById("newClose") as HTMLInputElement;
 const newSave  = document.getElementById("newSave")  as HTMLInputElement;
 
 const newTitle    = document.getElementById("newTitle")    as HTMLInputElement;
-const newDuration = document.getElementById("newDuration") as HTMLInputElement;
 const newDate     = document.getElementById("newDate")     as HTMLInputElement;
 const newTime     = document.getElementById("newTime")     as HTMLInputElement;
+const newDuration = document.getElementById("newDuration") as HTMLInputElement;
 const newLocation = document.getElementById("newLocation") as HTMLInputElement;
 
-const listTitle    = document.getElementById("listTitle")    as HTMLInputElement;
-const listDuration = document.getElementById("listDuration") as HTMLInputElement;
-const listDate     = document.getElementById("listDate")     as HTMLInputElement;
-
 const list = document.getElementById("list") as HTMLDataListElement;
-const div  = document.createElement("div");
 
 function clearNew()
 {
@@ -21,6 +16,45 @@ function clearNew()
     newDate.value = "";
     newTime.value = "";
     newLocation.value = "";
+}
+
+function appendAppointments(data: any)
+{
+    for(let i = 0; i < data.length; i++)
+    {
+        let li = document.createElement("li");
+        li.setAttribute("id", `${data[i].App_ID}`);
+        li.setAttribute("class", "list-group-item border-dark")
+
+        for(let j = 0; j < 3; j++)
+        {
+            let div   = document.createElement("div");
+            if(j == 0) { div.setAttribute("class", "bg-dark text-white"); }
+            let label = document.createElement("label");
+            let input = document.createElement("input");
+            input.setAttribute("class", "form-control-plaintext");
+            input.setAttribute("type", "text");
+            input.readOnly = true;
+
+            switch(j)
+            {
+                case 0:
+                    input.value = data[i].title;
+                    break;
+                case 1:
+                    label.innerHTML = "Duration";
+                    input.value = data[i].duration;
+                    break;
+                case 2:
+                    input.value = data[i].date;
+            }
+
+            if(j == 1) { div.appendChild(label); }
+            div.appendChild(input);
+            li.appendChild(div);
+        }
+        list.appendChild(li);
+    }
 }
 
 function fetchData(url: string)
@@ -33,58 +67,41 @@ function fetchData(url: string)
         return response.json();
     })
     .then(data => {
-        console.log(data);
+        appendAppointments(data);
     })
     .catch(error => {
         console.error("Fehler beim Laden der JSON-Datei:", error);
     });
 }
 
-function createNewAppointment() 
+function sendData(url: string)
 {
-    clearNew();
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `input1=${encodeURIComponent(newTitle.value)}&input2=${encodeURIComponent(newDate.value)}&input3=${encodeURIComponent(newTime.value)}&input4=${encodeURIComponent(newDuration.value)}&input5=${encodeURIComponent(newLocation.value)}`
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log('Server Response:', data);
+    })
+    .catch(error => {
+        console.error('Error sending data:', error);
+    });
 }
 
 newClose?.addEventListener("click", () => {
     clearNew();
 })
 
-
+newSave?.addEventListener('click', () => {
+    sendData('../backend/logic/appocreation.php');
+    clearNew();
+});
 
 document.addEventListener('DOMContentLoaded', function (){ 
     fetch('../backend/servicehandler.php');
     fetchData("../backend/JSON/Appointments.json");
-
-    const saveButton = document.getElementById('newSave') as HTMLButtonElement;
-
-    saveButton.addEventListener('click', () => {
-        let input1 = (document.getElementById('newTitle') as HTMLInputElement).value;
-        const input2 = (document.getElementById('newDate') as HTMLInputElement).value;
-        const input3 = (document.getElementById('newTime') as HTMLInputElement).value;
-        const input4 = (document.getElementById('newDuration') as HTMLInputElement).value;
-        const input5 = (document.getElementById('newLocation') as HTMLInputElement).value;
-
-        console.log('Input 1:', input1);
-        console.log('Input 2:', input2);
-        console.log('Input 3:', input3);
-        console.log('Input 4:', input4);
-        console.log('Input 5:', input5);
-  
-        // call to backend
-        fetch('../backend/logic/appocreation.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: `input1=${encodeURIComponent(input1)}&input2=${encodeURIComponent(input2)}&input3=${encodeURIComponent(input3)}&input4=${encodeURIComponent(input4)}&input5=${encodeURIComponent(input5)}`
-        })
-        .then(response => response.text())
-        .then(data => {
-            console.log('Server Response:', data);
-        })
-        .catch(error => {
-            console.error('Error sending data:', error);
-        });
-        clearNew();
-    });
 });
