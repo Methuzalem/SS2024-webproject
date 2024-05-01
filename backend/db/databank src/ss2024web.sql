@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 30. Apr 2024 um 13:47
+-- Erstellungszeit: 02. Mai 2024 um 01:25
 -- Server-Version: 10.4.28-MariaDB
 -- PHP-Version: 8.2.4
 
@@ -30,39 +30,37 @@ SET time_zone = "+00:00";
 CREATE TABLE `appointments` (
   `Appo_ID` int(11) NOT NULL,
   `title` varchar(64) NOT NULL,
-  `date` date NOT NULL,
-  `expire` date NOT NULL,
-  `adress` varchar(64) NOT NULL
+  `duration` int(12) NOT NULL,
+  `location` varchar(64) NOT NULL,
+  `expired` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Daten für Tabelle `appointments`
 --
 
-INSERT INTO `appointments` (`Appo_ID`, `title`, `date`, `expire`, `adress`) VALUES
-(1, 'Test Title 1', '2024-04-01', '2024-12-31', 'Test Adress 1'),
-(2, 'Test Title 2', '2024-01-01', '2024-03-31', 'Test Adress 2');
+INSERT INTO `appointments` (`Appo_ID`, `title`, `duration`, `location`, `expired`) VALUES
+(39, 'Marvin', 6, 'Malediven', 0);
 
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `user`
+-- Tabellenstruktur für Tabelle `date`
 --
 
-CREATE TABLE `user` (
-  `user_ID` int(11) NOT NULL,
-  `username` varchar(64) NOT NULL,
-  `email` varchar(64) NOT NULL,
-  `appointments` int(11) NOT NULL
+CREATE TABLE `date` (
+  `date_ID` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `beginn` time NOT NULL,
+  `appointment` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Daten für Tabelle `user`
+-- Daten für Tabelle `date`
 --
 
-INSERT INTO `user` (`user_ID`, `username`, `email`, `appointments`) VALUES
-(7, 'Testuser 1', 'user1@gmail.com', 1),
-(8, 'Testuser 2', 'user2@gmail.com', 2);
+INSERT INTO `date` (`date_ID`, `date`, `beginn`, `appointment`) VALUES
+(26, '1222-12-12', '09:08:00', 39);
 
 -- --------------------------------------------------------
 
@@ -72,19 +70,18 @@ INSERT INTO `user` (`user_ID`, `username`, `email`, `appointments`) VALUES
 
 CREATE TABLE `votes` (
   `vote_ID` int(11) NOT NULL,
-  `user_ID` int(11) NOT NULL,
-  `comment` varchar(200) NOT NULL
+  `username` varchar(64) NOT NULL,
+  `comment` varchar(255) NOT NULL,
+  `date` int(11) NOT NULL,
+  `appointment` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Daten für Tabelle `votes`
 --
 
-INSERT INTO `votes` (`vote_ID`, `user_ID`, `comment`) VALUES
-(3, 7, 'This is the first comment from Testuser 1.'),
-(4, 7, 'This is the second comment from Testuser 1.'),
-(7, 8, 'This is the first comment from Testuser 2.'),
-(8, 8, 'This is the second comment from Testuser 2.');
+INSERT INTO `votes` (`vote_ID`, `username`, `comment`, `date`, `appointment`) VALUES
+(2, 'Marvin', 'This is the inital comment', 26, 39);
 
 --
 -- Indizes der exportierten Tabellen
@@ -97,18 +94,19 @@ ALTER TABLE `appointments`
   ADD PRIMARY KEY (`Appo_ID`);
 
 --
--- Indizes für die Tabelle `user`
+-- Indizes für die Tabelle `date`
 --
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`user_ID`),
-  ADD KEY `appointments` (`appointments`);
+ALTER TABLE `date`
+  ADD PRIMARY KEY (`date_ID`),
+  ADD KEY `appointment` (`appointment`);
 
 --
 -- Indizes für die Tabelle `votes`
 --
 ALTER TABLE `votes`
   ADD PRIMARY KEY (`vote_ID`),
-  ADD KEY `user_ID` (`user_ID`);
+  ADD KEY `appointment` (`appointment`),
+  ADD KEY `date` (`date`);
 
 --
 -- AUTO_INCREMENT für exportierte Tabellen
@@ -118,35 +116,36 @@ ALTER TABLE `votes`
 -- AUTO_INCREMENT für Tabelle `appointments`
 --
 ALTER TABLE `appointments`
-  MODIFY `Appo_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Appo_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
--- AUTO_INCREMENT für Tabelle `user`
+-- AUTO_INCREMENT für Tabelle `date`
 --
-ALTER TABLE `user`
-  MODIFY `user_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+ALTER TABLE `date`
+  MODIFY `date_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT für Tabelle `votes`
 --
 ALTER TABLE `votes`
-  MODIFY `vote_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `vote_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints der exportierten Tabellen
 --
 
 --
--- Constraints der Tabelle `user`
+-- Constraints der Tabelle `date`
 --
-ALTER TABLE `user`
-  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`appointments`) REFERENCES `appointments` (`Appo_ID`);
+ALTER TABLE `date`
+  ADD CONSTRAINT `date_ibfk_1` FOREIGN KEY (`appointment`) REFERENCES `appointments` (`Appo_ID`);
 
 --
 -- Constraints der Tabelle `votes`
 --
 ALTER TABLE `votes`
-  ADD CONSTRAINT `votes_ibfk_2` FOREIGN KEY (`user_ID`) REFERENCES `user` (`user_ID`);
+  ADD CONSTRAINT `votes_ibfk_1` FOREIGN KEY (`appointment`) REFERENCES `appointments` (`Appo_ID`),
+  ADD CONSTRAINT `votes_ibfk_2` FOREIGN KEY (`date`) REFERENCES `date` (`date_ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -4,23 +4,5 @@
         "date": "1222-12-12",
         "beginn": "09:08:00",
         "appointment": "39"
-    },
-    {
-        "date_ID": "27",
-        "date": "0000-00-00",
-        "beginn": "00:00:00",
-        "appointment": "40"
-    },
-    {
-        "date_ID": "28",
-        "date": "1212-12-12",
-        "beginn": "12:00:00",
-        "appointment": "41"
-    },
-    {
-        "date_ID": "29",
-        "date": "1212-12-12",
-        "beginn": "12:12:00",
-        "appointment": "42"
     }
 ]
