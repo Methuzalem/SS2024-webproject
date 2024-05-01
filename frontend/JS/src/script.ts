@@ -7,7 +7,17 @@ const newTime     = document.getElementById("newTime")     as HTMLInputElement;
 const newDuration = document.getElementById("newDuration") as HTMLInputElement;
 const newLocation = document.getElementById("newLocation") as HTMLInputElement;
 
-const list = document.getElementById("list") as HTMLDataListElement;
+const appointmentTitle    = document.getElementById("appointmentTitle") as HTMLInputElement;
+const appointmentDuration = document.getElementById("appointmentTitle") as HTMLInputElement;
+const appointmentLocation = document.getElementById("appointmentTitle") as HTMLInputElement;
+const appointmentExpire   = document.getElementById("appointmentTitle") as HTMLInputElement;
+const appointmentName     = document.getElementById("appointmentTitle") as HTMLInputElement;
+const appointmentDate     = document.getElementById("appointmentTitle") as HTMLInputElement;
+const appointmentTime     = document.getElementById("appointmentTitle") as HTMLInputElement;
+const appointmentComment  = document.getElementById("appointmentTitle") as HTMLInputElement;
+
+const list         = document.getElementById("list") as HTMLDataListElement;
+const listElements = document.querySelectorAll("ul li");
 
 function clearNew()
 {
@@ -101,16 +111,15 @@ function sendData(url: string)
     });
 }
 
-
+function refreshPage() 
+{
+    window.location.href = window.location.pathname + window.location.search + '#';
+    window.location.reload();
+}
 
 newClose?.addEventListener("click", () => {
     clearNew();
 })
-
-function refreshPage(): void {
-    window.location.href = window.location.pathname + window.location.search + '#';
-    window.location.reload();
-}
 
 newSave?.addEventListener('click', () => {
     sendData('../backend/logic/appocreation.php')
@@ -121,6 +130,18 @@ newSave?.addEventListener('click', () => {
         .catch(error => {
             console.error('Error sending data:', error);
         });
+})
+
+function test(event: MouseEvent)
+{
+    const clickedElement = event.target as HTMLElement;
+    alert(clickedElement.id);
+}
+
+listElements.forEach((element) => {
+    element.addEventListener("click", function(event: MouseEvent) {
+        test(event);
+    });
 })
 
 document.addEventListener('DOMContentLoaded', function (){ 

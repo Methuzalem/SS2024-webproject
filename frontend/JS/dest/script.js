@@ -6,7 +6,16 @@ var newDate = document.getElementById("newDate");
 var newTime = document.getElementById("newTime");
 var newDuration = document.getElementById("newDuration");
 var newLocation = document.getElementById("newLocation");
+var appointmentTitle = document.getElementById("appointmentTitle");
+var appointmentDuration = document.getElementById("appointmentTitle");
+var appointmentLocation = document.getElementById("appointmentTitle");
+var appointmentExpire = document.getElementById("appointmentTitle");
+var appointmentName = document.getElementById("appointmentTitle");
+var appointmentDate = document.getElementById("appointmentTitle");
+var appointmentTime = document.getElementById("appointmentTitle");
+var appointmentComment = document.getElementById("appointmentTitle");
 var list = document.getElementById("list");
+var listElements = document.querySelectorAll("ul li");
 function clearNew() {
     newTitle.value = "";
     newDuration.value = "";
@@ -79,13 +88,13 @@ function sendData(url) {
         console.error('Error sending data:', error);
     });
 }
-newClose === null || newClose === void 0 ? void 0 : newClose.addEventListener("click", function () {
-    clearNew();
-});
 function refreshPage() {
     window.location.href = window.location.pathname + window.location.search + '#';
     window.location.reload();
 }
+newClose === null || newClose === void 0 ? void 0 : newClose.addEventListener("click", function () {
+    clearNew();
+});
 newSave === null || newSave === void 0 ? void 0 : newSave.addEventListener('click', function () {
     sendData('../backend/logic/appocreation.php')
         .then(function () {
@@ -94,6 +103,15 @@ newSave === null || newSave === void 0 ? void 0 : newSave.addEventListener('clic
     })
         .catch(function (error) {
         console.error('Error sending data:', error);
+    });
+});
+function test(event) {
+    var clickedElement = event.target;
+    alert(clickedElement.id);
+}
+listElements.forEach(function (element) {
+    element.addEventListener("click", function (event) {
+        test(event);
     });
 });
 document.addEventListener('DOMContentLoaded', function () {
