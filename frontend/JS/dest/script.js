@@ -1,3 +1,4 @@
+"use strict";
 var newClose = document.getElementById("newClose");
 var newSave = document.getElementById("newSave");
 var newTitle = document.getElementById("newTitle");
@@ -16,34 +17,33 @@ function clearNew() {
 function appendAppointments(data) {
     for (var i = 0; i < data.length; i++) {
         var li = document.createElement("li");
-        li.setAttribute("id", "".concat(data[i].App_ID));
-        li.setAttribute("class", "list-group-item border-dark");
-        for (var j = 0; j < 3; j++) {
+        li.setAttribute("id", i.toString());
+        for (var j = 0; j < 2; j++) {
             var div = document.createElement("div");
-            if (j == 0) {
-                div.setAttribute("class", "bg-dark text-white");
-            }
-            var label = document.createElement("label");
             var input = document.createElement("input");
             input.setAttribute("class", "form-control-plaintext");
             input.setAttribute("type", "text");
             input.readOnly = true;
             switch (j) {
                 case 0:
+                    div.setAttribute("class", "appointmentTitle");
                     input.value = data[i].title;
                     break;
                 case 1:
-                    label.innerHTML = "Duration";
-                    input.value = data[i].duration;
-                    break;
-                case 2:
-                    input.value = data[i].date;
-            }
-            if (j == 1) {
-                div.appendChild(label);
+                    input.value = "Duration: " + data[i].duration + " hours";
             }
             div.appendChild(input);
             li.appendChild(div);
+        }
+        var temp = new Date();
+        console.log(temp.toISOString().split('T')[0]);
+        li.setAttribute("data-bs-toggle", "modal");
+        li.setAttribute("data-bs-target", "#appointmentModal");
+        if (data[i].expired == 0) {
+            li.setAttribute("class", "list-group-item border-dark");
+        }
+        else {
+            li.setAttribute("class", "list-group-item border-dark bg-secondary");
         }
         list.appendChild(li);
     }
@@ -94,6 +94,7 @@ function canSave() {
         newLocation.value.trim() !== "";
 }
 newSave === null || newSave === void 0 ? void 0 : newSave.addEventListener('click', function () {
+<<<<<<< HEAD
     if (canSave()) {
         sendData('../backend/logic/appocreation.php')
             .then(function () {
@@ -107,6 +108,16 @@ newSave === null || newSave === void 0 ? void 0 : newSave.addEventListener('clic
     else {
         alert('Please fill out all fields before saving!');
     }
+=======
+    sendData('../backend/logic/appocreation.php')
+        .then(function () {
+        clearNew();
+        refreshPage();
+    })
+        .catch(function (error) {
+        console.error('Error sending data:', error);
+    });
+>>>>>>> c1015454745ea08b7c8d331b508b2dc2594d42ac
 });
 document.addEventListener('DOMContentLoaded', function () {
     fetch('../backend/servicehandler.php')

@@ -35,28 +35,26 @@
                             <h5 class="modal-title" id="newAppointmentModalLabel">Create a new Appointment</h5>
                         </div>
                         <div class="modal-body">
-                          <form>
                             <div>
                                 <label class="form-label thickLabel">Appointment title</label>
-                                <input type="text" id="newTitle" name="newTitle" class="form-control border-dark">
+                                <input type="text" id="newTitle" class="form-control border-dark">
                             </div>
                             <div>
                                 <label for="newDate" class="form-label thickLabel">Appointment date</label>
-                                <input type="date" id="newDate" name="newDate" class="form-control border-dark">
+                                <input type="date" id="newDate" class="form-control border-dark">
                             </div>
                             <div>
                                 <label for="newTime" class="form-label thickLabel">Starting Time</label>
-                                <input type="time" id="newTime" name="newTime" class="form-control border-dark">
+                                <input type="time" id="newTime" class="form-control border-dark">
                             </div>
                             <div>
                                 <label for="newDuration" class="form-label thickLabel">Duration</label>
-                                <input type="time" id="newDuration" name="newDuration" class="form-control border-dark">
+                                <input type="time" id="newDuration"" class="form-control border-dark">
                             </div>
                             <div>
                                 <label for="newLocation" class="form-label thickLabel">Location</label>
-                                <input type="text" id="newLocation" name="newLocation" class="form-control border-dark">
+                                <input type="text" id="newLocation" class="form-control border-dark">
                             </div>
-                        </form>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="newClose">Close</button>
@@ -65,7 +63,51 @@
                     </div>
                 </div>
             </div>
-            
+
+            <div class="modal fade" id="appointmentModal" tabindex="-1" aria-labelledby="appointmentModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header" id="modalHeader">
+                            <h5 class="modal-title" id="appointmentModalLabel">Title</h5>
+                        </div>
+                        <div class="modal-body">
+                            <div>
+                                <label for="appointmentDuration" class="form-label thickLabel">Duration</label>
+                                <input readonly type="time" id="appointmentDuration" class="form-control border-dark">
+                            </div>
+                            <div>
+                                <label for="appointmentLocation" class="form-label thickLabel">Location</label>
+                                <input readonly type="text" id="appointmentLocation" class="form-control border-dark">
+                            </div>
+                            <div>
+                                <label for="appointmentExpire" class="form-label thickLabel">Expire</label>
+                                <input readonly type="text" id="appointmentExpire" class="form-control border-dark">
+                            </div>
+                            <div>
+                                <label for="appointmentName" class="form-label thickLabel">Name</label>
+                                <input type="date" id="appointmentName" class="form-control border-dark">
+                            </div>
+                            <div>
+                                <label for="appointmentDate" class="form-label thickLabel">Appointment date</label>
+                                <input type="date" id="appointmentDate" class="form-control border-dark">
+                            </div>
+                            <div>
+                                <label for="appointmentTime" class="form-label thickLabel">Starting Time</label>
+                                <input type="time" id="appointmentTime" class="form-control border-dark">
+                            </div>
+                            <div>
+                                <label for="appointmentComment" class="form-label thickLabel">Comment</label>
+                                <input type="textbox" id="appointmentComment" class="form-control border-dark">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="newClose">Close</button>
+                            <button type="button" class="btn btn-dark" data-bs-dismiss="modal" id="newSave">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="container">
                 <ul class="list-group ms-3" id="list">
                 </ul>

@@ -27,3 +27,12 @@
 .appointment {
     border: 1px solid black;
 }
+
+.appointmentTitle {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.deactivated {
+    background-color: gray;
+}

@@ -23,14 +23,12 @@ function appendAppointments(data: any)
     for(let i = 0; i < data.length; i++)
     {
         let li = document.createElement("li");
-        li.setAttribute("id", `${data[i].App_ID}`);
-        li.setAttribute("class", "list-group-item border-dark")
+        li.setAttribute("id", i.toString());
 
-        for(let j = 0; j < 3; j++)
+        for(let j = 0; j < 2; j++)
         {
-            let div   = document.createElement("div");
-            if(j == 0) { div.setAttribute("class", "bg-dark text-white"); }
-            let label = document.createElement("label");
+            let div = document.createElement("div");
+
             let input = document.createElement("input");
             input.setAttribute("class", "form-control-plaintext");
             input.setAttribute("type", "text");
@@ -39,20 +37,31 @@ function appendAppointments(data: any)
             switch(j)
             {
                 case 0:
+                    div.setAttribute("class", "appointmentTitle");
                     input.value = data[i].title;
                     break;
                 case 1:
-                    label.innerHTML = "Duration";
-                    input.value = data[i].duration;
-                    break;
-                case 2:
-                    input.value = data[i].date;
+                    input.value = "Duration: " + data[i].duration + " hours";
             }
 
-            if(j == 1) { div.appendChild(label); }
             div.appendChild(input);
             li.appendChild(div);
         }
+        
+        let temp = new Date();
+        console.log(temp.toISOString().split('T')[0]);
+
+        li.setAttribute("data-bs-toggle", "modal");
+        li.setAttribute("data-bs-target", "#appointmentModal");
+        if(data[i].expired == 0)
+        {
+            li.setAttribute("class", "list-group-item border-dark")
+        }
+        else
+        {
+            li.setAttribute("class", "list-group-item border-dark bg-secondary");
+        }
+
         list.appendChild(li);
     }
 }
@@ -91,6 +100,8 @@ function sendData(url: string)
         console.error('Error sending data:', error);
     });
 }
+
+
 
 newClose?.addEventListener("click", () => {
     clearNew();
