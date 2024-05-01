@@ -23,14 +23,14 @@ function appendAppointments(data: any)
     for(let i = 0; i < data.length; i++)
     {
         let li = document.createElement("li");
-        li.setAttribute("id", `${data[i].App_ID}`);
+        li.setAttribute("id", "${data[i].App_ID}");
         li.setAttribute("class", "list-group-item border-dark")
 
         for(let j = 0; j < 3; j++)
         {
-            let div   = document.createElement("div");
-            if(j == 0) { div.setAttribute("class", "bg-dark text-white"); }
-            let label = document.createElement("label");
+            let div = document.createElement("div");
+            if(j == 0) { div.setAttribute("class", "appointmentTitle"); }
+
             let input = document.createElement("input");
             input.setAttribute("class", "form-control-plaintext");
             input.setAttribute("type", "text");
@@ -42,17 +42,25 @@ function appendAppointments(data: any)
                     input.value = data[i].title;
                     break;
                 case 1:
-                    label.innerHTML = "Duration";
-                    input.value = data[i].duration;
+                    input.value = "Duration: " + data[i].duration + " hours";
                     break;
                 case 2:
                     input.value = data[i].date;
             }
 
-            if(j == 1) { div.appendChild(label); }
             div.appendChild(input);
             li.appendChild(div);
         }
+
+        let temp = new Date();
+        console.log(temp);
+
+        if(data[i].expired == 0)
+        {
+            li.setAttribute("data-bs-toggle", "modal");
+            li.setAttribute("data-bs-target", "#newAppointmentModal");
+        }
+
         list.appendChild(li);
     }
 }
