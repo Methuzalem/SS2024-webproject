@@ -17,35 +17,33 @@ function clearNew() {
 function appendAppointments(data) {
     for (var i = 0; i < data.length; i++) {
         var li = document.createElement("li");
-        li.setAttribute("id", "${data[i].App_ID}");
-        li.setAttribute("class", "list-group-item border-dark");
-        for (var j = 0; j < 3; j++) {
+        li.setAttribute("id", i.toString());
+        for (var j = 0; j < 2; j++) {
             var div = document.createElement("div");
-            if (j == 0) {
-                div.setAttribute("class", "appointmentTitle");
-            }
             var input = document.createElement("input");
             input.setAttribute("class", "form-control-plaintext");
             input.setAttribute("type", "text");
             input.readOnly = true;
             switch (j) {
                 case 0:
+                    div.setAttribute("class", "appointmentTitle");
                     input.value = data[i].title;
                     break;
                 case 1:
                     input.value = "Duration: " + data[i].duration + " hours";
-                    break;
-                case 2:
-                    input.value = data[i].date;
             }
             div.appendChild(input);
             li.appendChild(div);
         }
         var temp = new Date();
-        console.log(temp);
+        console.log(temp.toISOString().split('T')[0]);
+        li.setAttribute("data-bs-toggle", "modal");
+        li.setAttribute("data-bs-target", "#appointmentModal");
         if (data[i].expired == 0) {
-            li.setAttribute("data-bs-toggle", "modal");
-            li.setAttribute("data-bs-target", "#newAppointmentModal");
+            li.setAttribute("class", "list-group-item border-dark");
+        }
+        else {
+            li.setAttribute("class", "list-group-item border-dark bg-secondary");
         }
         list.appendChild(li);
     }

@@ -23,13 +23,11 @@ function appendAppointments(data: any)
     for(let i = 0; i < data.length; i++)
     {
         let li = document.createElement("li");
-        li.setAttribute("id", "${data[i].App_ID}");
-        li.setAttribute("class", "list-group-item border-dark")
+        li.setAttribute("id", i.toString());
 
-        for(let j = 0; j < 3; j++)
+        for(let j = 0; j < 2; j++)
         {
             let div = document.createElement("div");
-            if(j == 0) { div.setAttribute("class", "appointmentTitle"); }
 
             let input = document.createElement("input");
             input.setAttribute("class", "form-control-plaintext");
@@ -39,26 +37,29 @@ function appendAppointments(data: any)
             switch(j)
             {
                 case 0:
+                    div.setAttribute("class", "appointmentTitle");
                     input.value = data[i].title;
                     break;
                 case 1:
                     input.value = "Duration: " + data[i].duration + " hours";
-                    break;
-                case 2:
-                    input.value = data[i].date;
             }
 
             div.appendChild(input);
             li.appendChild(div);
         }
-
+        
         let temp = new Date();
-        console.log(temp);
+        console.log(temp.toISOString().split('T')[0]);
 
+        li.setAttribute("data-bs-toggle", "modal");
+        li.setAttribute("data-bs-target", "#appointmentModal");
         if(data[i].expired == 0)
         {
-            li.setAttribute("data-bs-toggle", "modal");
-            li.setAttribute("data-bs-target", "#newAppointmentModal");
+            li.setAttribute("class", "list-group-item border-dark")
+        }
+        else
+        {
+            li.setAttribute("class", "list-group-item border-dark bg-secondary");
         }
 
         list.appendChild(li);
@@ -99,6 +100,8 @@ function sendData(url: string)
         console.error('Error sending data:', error);
     });
 }
+
+
 
 newClose?.addEventListener("click", () => {
     clearNew();
