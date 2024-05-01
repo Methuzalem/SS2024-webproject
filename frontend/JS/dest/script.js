@@ -64,7 +64,7 @@ function fetchData(url) {
     });
 }
 function sendData(url) {
-    fetch(url, {
+    return fetch(url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -82,13 +82,19 @@ function sendData(url) {
 newClose === null || newClose === void 0 ? void 0 : newClose.addEventListener("click", function () {
     clearNew();
 });
+function refreshPage() {
+    window.location.href = window.location.pathname + window.location.search + '#';
+    window.location.reload();
+}
 newSave === null || newSave === void 0 ? void 0 : newSave.addEventListener('click', function () {
-    sendData('../backend/logic/appocreation.php');
-    clearNew();
-    fetch('../backend/servicehandler.php', {
-        method: "POST"
+    sendData('../backend/logic/appocreation.php')
+        .then(function () {
+        clearNew(); // Felder bereinigen nach erfolgreichem Senden
+        refreshPage(); // Seite neu laden
+    })
+        .catch(function (error) {
+        console.error('Error sending data:', error);
     });
-    fetchData("../backend/JSON/Appointments.json");
 });
 document.addEventListener('DOMContentLoaded', function () {
     fetch('../backend/servicehandler.php');

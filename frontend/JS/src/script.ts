@@ -76,7 +76,7 @@ function fetchData(url: string)
 
 function sendData(url: string)
 {
-    fetch(url, {
+    return fetch(url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -96,14 +96,21 @@ newClose?.addEventListener("click", () => {
     clearNew();
 })
 
+function refreshPage(): void {
+    window.location.href = window.location.pathname + window.location.search + '#';
+    window.location.reload();
+}
+
 newSave?.addEventListener('click', () => {
-    sendData('../backend/logic/appocreation.php');
-    clearNew();
-    fetch('../backend/servicehandler.php', {
-        method: "POST"
-    });
-    fetchData("../backend/JSON/Appointments.json");
-});
+    sendData('../backend/logic/appocreation.php')
+        .then(() => {
+            clearNew();
+            refreshPage(); 
+        })
+        .catch(error => {
+            console.error('Error sending data:', error);
+        });
+})
 
 document.addEventListener('DOMContentLoaded', function (){ 
     fetch('../backend/servicehandler.php');
