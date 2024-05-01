@@ -88,22 +88,34 @@ function sendData(url) {
         console.error('Error sending data:', error);
     });
 }
+newClose === null || newClose === void 0 ? void 0 : newClose.addEventListener("click", function () {
+    clearNew();
+});
 function refreshPage() {
     window.location.href = window.location.pathname + window.location.search + '#';
     window.location.reload();
 }
-newClose === null || newClose === void 0 ? void 0 : newClose.addEventListener("click", function () {
-    clearNew();
-});
+function canSave() {
+    return newTitle.value.trim() !== "" &&
+        newDate.value.trim() !== "" &&
+        newTime.value.trim() !== "" &&
+        newDuration.value.trim() !== "" &&
+        newLocation.value.trim() !== "";
+}
 newSave === null || newSave === void 0 ? void 0 : newSave.addEventListener('click', function () {
-    sendData('../backend/logic/appocreation.php')
-        .then(function () {
-        clearNew();
-        refreshPage();
-    })
-        .catch(function (error) {
-        console.error('Error sending data:', error);
-    });
+    if (canSave()) {
+        sendData('../backend/logic/appocreation.php')
+            .then(function () {
+            clearNew();
+            refreshPage();
+        })
+            .catch(function (error) {
+            console.error('Error sending data:', error);
+        });
+    }
+    else {
+        alert('Please fill out all fields before saving!');
+    }
 });
 function test(event) {
     var clickedElement = event.target;
@@ -115,6 +127,25 @@ listElements.forEach(function (element) {
     });
 });
 document.addEventListener('DOMContentLoaded', function () {
-    fetch('../backend/servicehandler.php');
-    fetchData("../backend/JSON/Appointments.json");
+    fetch('../backend/servicehandler.php')
+        .then(function () {
+        fetchData("../backend/JSON/Appointments.json");
+    });
+    //fix clicking outside modal box (delete values)
+    var newAppointmentModal = document.getElementById('newAppointmentModal');
+    var modalIsClosedByUser = true;
+    newSave.addEventListener('click', function () {
+        modalIsClosedByUser = false;
+    });
+    newClose.addEventListener('click', function () {
+        modalIsClosedByUser = false;
+    });
+    if (newAppointmentModal) {
+        newAppointmentModal.addEventListener('hidden.bs.modal', function () {
+            if (modalIsClosedByUser) {
+                clearNew();
+            }
+            modalIsClosedByUser = true;
+        });
+    }
 });
