@@ -99,6 +99,10 @@ newClose?.addEventListener("click", () => {
 newSave?.addEventListener('click', () => {
     sendData('../backend/logic/appocreation.php');
     clearNew();
+    fetch('../backend/servicehandler.php', {
+        method: "POST"
+    });
+    fetchData("../backend/JSON/Appointments.json");
 });
 
 document.addEventListener('DOMContentLoaded', function (){ 
