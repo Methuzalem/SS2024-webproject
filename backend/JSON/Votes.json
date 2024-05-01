@@ -1,9 +1,9 @@
 [
     {
-        "vote_ID": "1",
+        "vote_ID": "2",
         "username": "Marvin",
-        "comment": "This is a test comment",
-        "date": "1",
-        "appointment": "13"
+        "comment": "This is the inital comment",
+        "date": "26",
+        "appointment": "39"
     }
 ]
