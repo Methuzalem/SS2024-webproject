@@ -4,6 +4,8 @@ const newSave  = document.getElementById("newSave")  as HTMLInputElement;
 const newTitle    = document.getElementById("newTitle")    as HTMLInputElement;
 const newDuration = document.getElementById("newDuration") as HTMLInputElement;
 const newDate     = document.getElementById("newDate")     as HTMLInputElement;
+const newTime     = document.getElementById("newTime")     as HTMLInputElement;
+const newLocation = document.getElementById("newLocation") as HTMLInputElement;
 
 const listTitle    = document.getElementById("listTitle")    as HTMLInputElement;
 const listDuration = document.getElementById("listDuration") as HTMLInputElement;
@@ -17,6 +19,8 @@ function clearNew()
     newTitle.value = "";
     newDuration.value = "";
     newDate.value = "";
+    newTime.value = "";
+    newLocation.value = "";
 }
 
 function fetchData(url: string)
@@ -45,49 +49,42 @@ newClose?.addEventListener("click", () => {
     clearNew();
 })
 
-newSave?.addEventListener("click", () => {
-    createNewAppointment();
-})
 
-document.addEventListener('DOMContentLoaded', function () {
+
+document.addEventListener('DOMContentLoaded', function (){ 
     fetch('../backend/servicehandler.php');
     fetchData("../backend/JSON/Appointments.json");
 
-//function to send datas from appointment creation to db
     const saveButton = document.getElementById('newSave') as HTMLButtonElement;
-    const formElements = {
-        title: document.getElementById('newTitle') as HTMLInputElement,
-        date: document.getElementById('newDate') as HTMLInputElement,
-        time: document.getElementById('newTime') as HTMLInputElement,
-        duration: document.getElementById('newDuration') as HTMLInputElement,
-        location: document.getElementById('newLocation') as HTMLInputElement
-    };
 
-    saveButton.addEventListener('click', (event) => {
-        event.preventDefault(); 
+    saveButton.addEventListener('click', () => {
+        let input1 = (document.getElementById('newTitle') as HTMLInputElement).value;
+        const input2 = (document.getElementById('newDate') as HTMLInputElement).value;
+        const input3 = (document.getElementById('newTime') as HTMLInputElement).value;
+        const input4 = (document.getElementById('newDuration') as HTMLInputElement).value;
+        const input5 = (document.getElementById('newLocation') as HTMLInputElement).value;
 
-        const formData = new FormData(); 
-        formData.append('title', formElements.title.value);
-        formData.append('date', formElements.date.value);
-        formData.append('time', formElements.time.value);
-        formData.append('duration', formElements.duration.value);
-        formData.append('location', formElements.location.value);
-
+        console.log('Input 1:', input1);
+        console.log('Input 2:', input2);
+        console.log('Input 3:', input3);
+        console.log('Input 4:', input4);
+        console.log('Input 5:', input5);
+  
+        // call to backend
         fetch('../backend/logic/appocreation.php', {
             method: 'POST',
-            body: formData
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `input1=${encodeURIComponent(input1)}&input2=${encodeURIComponent(input2)}&input3=${encodeURIComponent(input3)}&input4=${encodeURIComponent(input4)}&input5=${encodeURIComponent(input5)}`
         })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Netzwerkantwort war nicht ok');
-            }
-            return response.json();
-        })
+        .then(response => response.text())
         .then(data => {
-            console.log('Erfolg:', data);
+            console.log('Server Response:', data);
         })
         .catch(error => {
-            console.error('Fehler beim Laden von appocreation.php:', error);
+            console.error('Error sending data:', error);
         });
+        clearNew();
     });
 });

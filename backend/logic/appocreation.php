@@ -1,25 +1,26 @@
 <?php
-header('Content-Type: json');
-
 require_once '../db/config.php'; // Datenbankkonfiguration einbinden
-
 $conn = connectDB(); // Datenbankverbindung herstellen
 
-// Daten aus POST holen
-$title = $_POST['title'] ?? '';
-$date = $_POST['date'] ?? '';
-$time = $_POST['time'] ?? '';
-$duration = $_POST['duration'] ?? '';
-$location = $_POST['location'] ?? '';
+// get data from post
+$title = $_POST['input1'] ?? '';
+$date = $_POST['input2'] ?? '';
+$time = $_POST['input3'] ?? '';
+$duration = $_POST['input4'] ?? '';
+$location = $_POST['input5'] ?? '';
 
-// SQL-Query vorbereiten
-$sql = "INSERT INTO appointments (title, 'date', 'time', duration, 'location') VALUES (?, ?, ?, ?, ?)";
+
+
+//DB query with SQL
+$sql = "INSERT INTO appointments (title, duration, location, date) VALUES (?, ?, ?, ?)";
 $stmt = $conn->prepare($sql);
+$stmt->bind_param("ssss", $title, $duration, $location, $date);
 
-// Parameter binden
-!$stmt->bind_param("sssss", $title, $date, $time, $duration, $location);
-
+$stmt->execute();
 
 $stmt->close();
+
+
+
 $conn->close();
 ?>

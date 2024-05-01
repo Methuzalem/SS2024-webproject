@@ -35,27 +35,28 @@
                             <h5 class="modal-title" id="newAppointmentModalLabel">Create a new Appointment</h5>
                         </div>
                         <div class="modal-body">
+                          <form>
                             <div>
-                                <label for="newTitle" class="form-label thickLabel">Appointment title</label>
-                                <input type="text" id="newTitle" class="form-control border-dark">
+                                <label class="form-label thickLabel">Appointment title</label>
+                                <input type="text" id="newTitle" name="newTitle" class="form-control border-dark">
                             </div>
                             <div>
                                 <label for="newDate" class="form-label thickLabel">Appointment date</label>
-                                <input type="date" id="newDate" class="form-control border-dark">
+                                <input type="date" id="newDate" name="newDate" class="form-control border-dark">
                             </div>
                             <div>
                                 <label for="newTime" class="form-label thickLabel">Starting Time</label>
-                                <input type="time" id="newTime" class="form-control border-dark">
+                                <input type="time" id="newTime" name="newTime" class="form-control border-dark">
                             </div>
                             <div>
                                 <label for="newDuration" class="form-label thickLabel">Duration</label>
-                                <input type="time" id="newDuration" class="form-control border-dark">
+                                <input type="time" id="newDuration" name="newDuration" class="form-control border-dark">
                             </div>
                             <div>
                                 <label for="newLocation" class="form-label thickLabel">Location</label>
-                                <input type="text" id="newLocation" class="form-control border-dark">
+                                <input type="text" id="newLocation" name="newLocation" class="form-control border-dark">
                             </div>
-                            </form>
+                        </form>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="newClose">Close</button>
