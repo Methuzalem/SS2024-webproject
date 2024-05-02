@@ -1,6 +1,7 @@
 "use strict";
 var newClose = document.getElementById("newClose");
 var newSave = document.getElementById("newSave");
+var appointmentClose = document.getElementById("appointmentClose");
 var appointmentSave = document.getElementById("appointmentSave");
 var newTitle = document.getElementById("newTitle");
 var newExpire = document.getElementById("newExpire");
@@ -15,6 +16,10 @@ var appointmentName = document.getElementById("appointmentName");
 var appointmentDate = document.getElementById("appointmentDate");
 var appointmentTime = document.getElementById("appointmentTime");
 var appointmentComment = document.getElementById("appointmentComment");
+var expiredTitle = document.getElementById("expiredTitle");
+var expiredDuration = document.getElementById("expiredTitle");
+var expiredLocation = document.getElementById("expiredTitle");
+var expiredExpire = document.getElementById("expiredTitle");
 var list = document.getElementById("list");
 var data;
 function clearNew() {
@@ -23,6 +28,12 @@ function clearNew() {
     newExpire.value = "";
     newTime.value = "";
     newLocation.value = "";
+}
+function clearAppointment() {
+    appointmentName.value = "";
+    appointmentDate.value = "";
+    appointmentTime.value = "";
+    appointmentComment.value = "";
 }
 function appendAppointments(data) {
     for (var i = 0; i < data.length; i++) {
@@ -54,6 +65,7 @@ function appendAppointments(data) {
         }
         else {
             li.setAttribute("class", "list-group-item border-dark bg-secondary");
+            li.setAttribute("data-bs-target", "#expiredModal");
         }
         list.appendChild(li);
     }
@@ -104,7 +116,19 @@ function canSave() {
         newDuration.value.trim() !== "" &&
         newLocation.value.trim() !== "";
 }
-function loadModal(id) {
+function canSaveAppointment() {
+    return appointmentName.value.trim() !== "" &&
+        appointmentDate.value.trim() !== "" &&
+        appointmentTime.value.trim() !== "" &&
+        appointmentComment.value.trim() !== "";
+}
+function loadExpireModal(id) {
+    expiredTitle.innerHTML = data[id].title;
+    expiredDuration.value = data[id].duration;
+    expiredLocation.value = data[id].location;
+    expiredExpire.value = data[id].date;
+}
+function loadVoteModal(id) {
     appointmentTitle.innerHTML = data[id].title;
     appointmentDuration.value = data[id].duration;
     appointmentLocation.value = data[id].location;
@@ -133,10 +157,10 @@ newSave === null || newSave === void 0 ? void 0 : newSave.addEventListener('clic
     }
 });
 appointmentSave === null || appointmentSave === void 0 ? void 0 : appointmentSave.addEventListener('click', function () {
-    if (canSave()) {
+    if (canSaveAppointment()) {
         sendDataAppo('../backend/logic/appocreation.php')
             .then(function () {
-            clearNew();
+            clearAppointment();
             refreshPage();
         })
             .catch(function (error) {
@@ -146,6 +170,9 @@ appointmentSave === null || appointmentSave === void 0 ? void 0 : appointmentSav
     else {
         alert('Please fill out all fields before saving!');
     }
+});
+appointmentClose === null || appointmentClose === void 0 ? void 0 : appointmentClose.addEventListener('click', function () {
+    clearAppointment();
 });
 list === null || list === void 0 ? void 0 : list.addEventListener("click", function (event) {
     var target = event.target;
@@ -157,7 +184,10 @@ list === null || list === void 0 ? void 0 : list.addEventListener("click", funct
         return;
     var id = li.getAttribute('id');
     if (id) {
-        loadModal(parseInt(id));
+        if (data[parseInt(id)].expired == 1)
+            loadExpireModal(parseInt(id));
+        else
+            loadVoteModal(parseInt(id));
     }
 });
 document.addEventListener('DOMContentLoaded', function () {
