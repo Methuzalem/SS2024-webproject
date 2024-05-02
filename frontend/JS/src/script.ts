@@ -2,28 +2,29 @@ const newClose = document.getElementById("newClose") as HTMLInputElement;
 const newSave  = document.getElementById("newSave")  as HTMLInputElement;
 
 const newTitle    = document.getElementById("newTitle")    as HTMLInputElement;
-const newDate     = document.getElementById("newDate")     as HTMLInputElement;
+const newExpire   = document.getElementById("newExpire")     as HTMLInputElement;
 const newTime     = document.getElementById("newTime")     as HTMLInputElement;
 const newDuration = document.getElementById("newDuration") as HTMLInputElement;
 const newLocation = document.getElementById("newLocation") as HTMLInputElement;
 
-const appointmentTitle    = document.getElementById("appointmentTitle") as HTMLInputElement;
-const appointmentDuration = document.getElementById("appointmentTitle") as HTMLInputElement;
-const appointmentLocation = document.getElementById("appointmentTitle") as HTMLInputElement;
-const appointmentExpire   = document.getElementById("appointmentTitle") as HTMLInputElement;
-const appointmentName     = document.getElementById("appointmentTitle") as HTMLInputElement;
-const appointmentDate     = document.getElementById("appointmentTitle") as HTMLInputElement;
-const appointmentTime     = document.getElementById("appointmentTitle") as HTMLInputElement;
-const appointmentComment  = document.getElementById("appointmentTitle") as HTMLInputElement;
+const appointmentTitle    = document.getElementById("appointmentTitle")    as HTMLInputElement;
+const appointmentDuration = document.getElementById("appointmentDuration") as HTMLInputElement;
+const appointmentLocation = document.getElementById("appointmentLocation") as HTMLInputElement;
+const appointmentExpire   = document.getElementById("appointmentExpire")   as HTMLInputElement;
+const appointmentName     = document.getElementById("appointmentName")     as HTMLInputElement;
+const appointmentDate     = document.getElementById("appointmentDate")     as HTMLInputElement;
+const appointmentTime     = document.getElementById("appointmentTime")     as HTMLInputElement;
+const appointmentComment  = document.getElementById("appointmentComment")  as HTMLInputElement;
 
-const list         = document.getElementById("list") as HTMLDataListElement;
-const listElements = document.querySelectorAll("ul li");
+const list = document.getElementById("list") as HTMLDataListElement;
+
+var data : any[];
 
 function clearNew()
 {
     newTitle.value = "";
     newDuration.value = "";
-    newDate.value = "";
+    newExpire.value = "";
     newTime.value = "";
     newLocation.value = "";
 }
@@ -76,7 +77,7 @@ function appendAppointments(data: any)
     }
 }
 
-function fetchData(url: string)
+function fetchData(url: string) : any
 {
     fetch(url)
     .then(response => {
@@ -85,8 +86,9 @@ function fetchData(url: string)
         }
         return response.json();
     })
-    .then(data => {
-        appendAppointments(data);
+    .then(fetchedData => {
+        appendAppointments(fetchedData);
+        data = fetchedData;
     })
     .catch(error => {
         console.error("Fehler beim Laden der JSON-Datei:", error);
@@ -100,7 +102,7 @@ function sendData(url: string)
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: `input1=${encodeURIComponent(newTitle.value)}&input2=${encodeURIComponent(newDate.value)}&input3=${encodeURIComponent(newTime.value)}&input4=${encodeURIComponent(newDuration.value)}&input5=${encodeURIComponent(newLocation.value)}`
+        body: `input1=${encodeURIComponent(newTitle.value)}&input2=${encodeURIComponent(newExpire.value)}&input3=${encodeURIComponent(newTime.value)}&input4=${encodeURIComponent(newDuration.value)}&input5=${encodeURIComponent(newLocation.value)}`
     })
     .then(response => response.text())
     .then(data => {
@@ -122,10 +124,25 @@ function refreshPage(): void {
 
 function canSave(): boolean {
     return newTitle.value.trim() !== "" &&
-           newDate.value.trim() !== "" &&
+           newExpire.value.trim() !== "" &&
            newTime.value.trim() !== "" &&
            newDuration.value.trim() !== "" &&
            newLocation.value.trim() !== "";
+}
+
+function loadModal(id: number)
+{
+    appointmentTitle.innerHTML = data[id].title;
+    appointmentDuration.value  = data[id].duration;
+    appointmentLocation.value  = data[id].location;
+    appointmentExpire.value    = data[id].date;
+    /*
+    send data with these four variables:
+    appointmentName
+    appointmentDate
+    appointmentTime     
+    appointmentComment
+    */
 }
 
 newSave?.addEventListener('click', () => {
@@ -143,16 +160,19 @@ newSave?.addEventListener('click', () => {
     }
 })
 
-function test(event: MouseEvent)
-{
-    const clickedElement = event.target as HTMLElement;
-    alert(clickedElement.id);
-}
-
-listElements.forEach((element) => {
-    element.addEventListener("click", function(event: MouseEvent) {
-        test(event);
-    });
+list?.addEventListener("click", function(event){
+    const target = event.target as HTMLElement;
+    let li = target;
+    while(li && li.nodeName !== 'LI')
+    {
+        li = li.parentNode as HTMLElement;
+    }
+    if(!li) return;
+    const id = li.getAttribute('id');
+    if(id)
+    {
+        loadModal(parseInt(id));
+    }
 })
 
 document.addEventListener('DOMContentLoaded', function (){ 

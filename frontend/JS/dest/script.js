@@ -2,24 +2,24 @@
 var newClose = document.getElementById("newClose");
 var newSave = document.getElementById("newSave");
 var newTitle = document.getElementById("newTitle");
-var newDate = document.getElementById("newDate");
+var newExpire = document.getElementById("newExpire");
 var newTime = document.getElementById("newTime");
 var newDuration = document.getElementById("newDuration");
 var newLocation = document.getElementById("newLocation");
 var appointmentTitle = document.getElementById("appointmentTitle");
-var appointmentDuration = document.getElementById("appointmentTitle");
-var appointmentLocation = document.getElementById("appointmentTitle");
-var appointmentExpire = document.getElementById("appointmentTitle");
-var appointmentName = document.getElementById("appointmentTitle");
-var appointmentDate = document.getElementById("appointmentTitle");
-var appointmentTime = document.getElementById("appointmentTitle");
-var appointmentComment = document.getElementById("appointmentTitle");
+var appointmentDuration = document.getElementById("appointmentDuration");
+var appointmentLocation = document.getElementById("appointmentLocation");
+var appointmentExpire = document.getElementById("appointmentExpire");
+var appointmentName = document.getElementById("appointmentName");
+var appointmentDate = document.getElementById("appointmentDate");
+var appointmentTime = document.getElementById("appointmentTime");
+var appointmentComment = document.getElementById("appointmentComment");
 var list = document.getElementById("list");
-var listElements = document.querySelectorAll("ul li");
+var data;
 function clearNew() {
     newTitle.value = "";
     newDuration.value = "";
-    newDate.value = "";
+    newExpire.value = "";
     newTime.value = "";
     newLocation.value = "";
 }
@@ -65,8 +65,9 @@ function fetchData(url) {
         }
         return response.json();
     })
-        .then(function (data) {
-        appendAppointments(data);
+        .then(function (fetchedData) {
+        appendAppointments(fetchedData);
+        data = fetchedData;
     })
         .catch(function (error) {
         console.error("Fehler beim Laden der JSON-Datei:", error);
@@ -78,7 +79,7 @@ function sendData(url) {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: "input1=".concat(encodeURIComponent(newTitle.value), "&input2=").concat(encodeURIComponent(newDate.value), "&input3=").concat(encodeURIComponent(newTime.value), "&input4=").concat(encodeURIComponent(newDuration.value), "&input5=").concat(encodeURIComponent(newLocation.value))
+        body: "input1=".concat(encodeURIComponent(newTitle.value), "&input2=").concat(encodeURIComponent(newExpire.value), "&input3=").concat(encodeURIComponent(newTime.value), "&input4=").concat(encodeURIComponent(newDuration.value), "&input5=").concat(encodeURIComponent(newLocation.value))
     })
         .then(function (response) { return response.text(); })
         .then(function (data) {
@@ -97,10 +98,23 @@ function refreshPage() {
 }
 function canSave() {
     return newTitle.value.trim() !== "" &&
-        newDate.value.trim() !== "" &&
+        newExpire.value.trim() !== "" &&
         newTime.value.trim() !== "" &&
         newDuration.value.trim() !== "" &&
         newLocation.value.trim() !== "";
+}
+function loadModal(id) {
+    appointmentTitle.innerHTML = data[id].title;
+    appointmentDuration.value = data[id].duration;
+    appointmentLocation.value = data[id].location;
+    appointmentExpire.value = data[id].date;
+    /*
+    send data with these four variables:
+    appointmentName
+    appointmentDate
+    appointmentTime
+    appointmentComment
+    */
 }
 newSave === null || newSave === void 0 ? void 0 : newSave.addEventListener('click', function () {
     if (canSave()) {
@@ -117,14 +131,18 @@ newSave === null || newSave === void 0 ? void 0 : newSave.addEventListener('clic
         alert('Please fill out all fields before saving!');
     }
 });
-function test(event) {
-    var clickedElement = event.target;
-    alert(clickedElement.id);
-}
-listElements.forEach(function (element) {
-    element.addEventListener("click", function (event) {
-        test(event);
-    });
+list === null || list === void 0 ? void 0 : list.addEventListener("click", function (event) {
+    var target = event.target;
+    var li = target;
+    while (li && li.nodeName !== 'LI') {
+        li = li.parentNode;
+    }
+    if (!li)
+        return;
+    var id = li.getAttribute('id');
+    if (id) {
+        loadModal(parseInt(id));
+    }
 });
 document.addEventListener('DOMContentLoaded', function () {
     fetch('../backend/servicehandler.php')
