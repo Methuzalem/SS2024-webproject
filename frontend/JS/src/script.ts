@@ -32,6 +32,7 @@ const list = document.getElementById("list") as HTMLDataListElement;
 var data : any[];
 var dates : string[] = [];
 
+
 function clearNew()
 {
     newTitle.value = "";
@@ -119,12 +120,13 @@ function fetchData(url: string) : any
 
 function sendDataAppo(url: string)
 {
+    var datesString = dates.join(",");
     return fetch(url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: `input1=${encodeURIComponent(newTitle.value)}&input2=${encodeURIComponent(newExpire.value)}&input3=${encodeURIComponent(newTime.value)}&input4=${encodeURIComponent(newDuration.value)}&input5=${encodeURIComponent(newLocation.value)}`
+        body: `input1=${encodeURIComponent(newTitle.value)}&input2=${encodeURIComponent(newExpire.value)}&input3=${encodeURIComponent(newTime.value)}&input4=${encodeURIComponent(newDuration.value)}&input5=${encodeURIComponent(newLocation.value)}&input6=${encodeURIComponent(datesString)}`
     })
     .then(response => response.text())
     .then(data => {
@@ -189,22 +191,10 @@ function loadVoteModal(id: number)
     appointmentTitle.innerHTML = data[id].title;
     appointmentDuration.value  = data[id].duration;
     appointmentLocation.value  = data[id].location;
-    appointmentExpire.value    = data[id].date;
+    appointmentExpire.value    = data[id].expireDate;
 
     appointmentID = data[id].Appo_ID;
-    appointmentName.value 
 
-
-
-    
-
-    /*
-    send data with these four variables:
-    appointmentName
-    appointmentDate
-    appointmentTime     
-    appointmentComment
-    */
 }
 
 appointmentSave?.addEventListener('click', () => {
@@ -217,7 +207,6 @@ appointmentSave?.addEventListener('click', () => {
         });
         
 })
-
 
 newSave?.addEventListener('click', () => {
     if (canSave()) {
@@ -243,7 +232,6 @@ addDate?.addEventListener("click", function(){
     newDate.value = "";
 })
 
-*/
 list?.addEventListener("click", function(event){
     const target = event.target as HTMLElement;
     let li = target;

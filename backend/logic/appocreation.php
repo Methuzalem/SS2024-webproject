@@ -4,16 +4,17 @@ $conn = connectDB();
 
 // get data from post
 $title = $_POST['input1'] ?? '';
-$date = $_POST['input2'] ?? '';
+$expireDate = $_POST['input2'] ?? '';
 $time = $_POST['input3'] ?? '';
 $duration = $_POST['input4'] ?? '';
 $location = $_POST['input5'] ?? '';
+$datesString = $_POST['input6'] ?? '';
 $isOption = "1";
 
 //INSERT appointment statement
-$AppoSql = "INSERT INTO appointments (title, duration, location) VALUES (?, ?, ?)";
-$stmt = $conn->prepare($AppoSql);
-$stmt->bind_param("sss", $title, $duration, $location);
+$appoSQL = "INSERT INTO appointments (title, expireDate, duration, location) VALUES (?, ?, ?, ?)";
+$stmt = $conn->prepare($appoSQL);
+$stmt->bind_param("ssss", $title, $expireDate, $duration, $location);
 $stmt->execute();
 //Get autoincrement ID
 $appoID = $stmt->insert_id;
@@ -37,12 +38,27 @@ if ($result->num_rows > 0) {
     echo "Error: not found.";
 }
 
-//INSERT date statement
-$DateSql = "INSERT INTO date (date, beginn, appointment, isOption) VALUES (?, ?, ?, ?)";
-$stmt = $conn->prepare($DateSql);
-$stmt->bind_param("sssi", $date, $time, $appoID, $isOption);
-$stmt->execute();
-$stmt->close();
+//function to INSERT into date
+function insertDate($value, $time, $appoID, $isOption) {
+    $conn = connectDB(); 
+
+    $dateSQL = "INSERT INTO date (date, beginn, appointment, isOption) VALUES (?, ?, ?, ?)";
+    $stmt = $conn->prepare($dateSQL);
+    $stmt->bind_param("sssi", $value, $time, $appoID, $isOption);
+    $stmt->execute();
+    $stmt->close();
+
+    $conn->close();
+}
+
+//slice datesString into single dates
+if (isset($_POST['input6'])) {
+    $datesString = $_POST['input6'];
+    $datesArray = explode(',', $datesString);
+    foreach ($datesArray as $date) {
+        insertDate($date, $time, $appoID, $isOption);
+    }
+}
 
 //JSON for date
 $sql = "SELECT * FROM date";

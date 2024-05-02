@@ -11,11 +11,13 @@ $appointmentID = $_POST['input5'] ?? '';
 
 
 
+
 echo "Hello ".$username." is here!";
 echo "Hello ".$date." is here!";
 echo "Hello ".$time." is here!";
 echo "Hello ".$comment." is here!";
 echo "Hello ".$appointmentID." is here!";
+
 
 
 

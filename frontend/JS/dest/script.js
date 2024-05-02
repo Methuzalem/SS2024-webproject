@@ -91,12 +91,13 @@ function fetchData(url) {
     });
 }
 function sendDataAppo(url) {
+    var datesString = dates.join(",");
     return fetch(url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: "input1=".concat(encodeURIComponent(newTitle.value), "&input2=").concat(encodeURIComponent(newExpire.value), "&input3=").concat(encodeURIComponent(newTime.value), "&input4=").concat(encodeURIComponent(newDuration.value), "&input5=").concat(encodeURIComponent(newLocation.value))
+        body: "input1=".concat(encodeURIComponent(newTitle.value), "&input2=").concat(encodeURIComponent(newExpire.value), "&input3=").concat(encodeURIComponent(newTime.value), "&input4=").concat(encodeURIComponent(newDuration.value), "&input5=").concat(encodeURIComponent(newLocation.value), "&input6=").concat(encodeURIComponent(datesString))
     })
         .then(function (response) { return response.text(); })
         .then(function (data) {
@@ -151,16 +152,8 @@ function loadVoteModal(id) {
     appointmentTitle.innerHTML = data[id].title;
     appointmentDuration.value = data[id].duration;
     appointmentLocation.value = data[id].location;
-    appointmentExpire.value = data[id].date;
+    appointmentExpire.value = data[id].expireDate;
     appointmentID = data[id].Appo_ID;
-    appointmentName.value;
-    /*
-    send data with these four variables:
-    appointmentName
-    appointmentDate
-    appointmentTime
-    appointmentComment
-    */
 }
 appointmentSave === null || appointmentSave === void 0 ? void 0 : appointmentSave.addEventListener('click', function () {
     sendDataVote('../backend/logic/votecreation.php')
