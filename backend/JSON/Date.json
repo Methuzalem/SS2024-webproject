@@ -5,26 +5,5 @@
         "beginn": "20:00:00",
         "appointment": "89",
         "isOption": "1"
-    },
-    {
-        "date_ID": "72",
-        "date": "2024-05-03",
-        "beginn": "20:00:00",
-        "appointment": "90",
-        "isOption": "1"
-    },
-    {
-        "date_ID": "73",
-        "date": "2024-05-04",
-        "beginn": "20:00:00",
-        "appointment": "90",
-        "isOption": "1"
-    },
-    {
-        "date_ID": "74",
-        "date": "2024-05-05",
-        "beginn": "20:00:00",
-        "appointment": "90",
-        "isOption": "1"
     }
 ]
