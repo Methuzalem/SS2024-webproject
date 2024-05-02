@@ -47,5 +47,12 @@
         "beginn": "12:12:00",
         "appointment": "64",
         "isOption": "0"
+    },
+    {
+        "date_ID": "52",
+        "date": "0001-01-01",
+        "beginn": "01:01:00",
+        "appointment": "67",
+        "isOption": "1"
     }
 ]

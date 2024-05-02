@@ -1,4 +1,3 @@
-"use strict";
 var newClose = document.getElementById("newClose");
 var newSave = document.getElementById("newSave");
 var appointmentClose = document.getElementById("appointmentClose");
@@ -104,13 +103,12 @@ function sendDataAppo(url) {
     });
 }
 function sendDataVote(url) {
-    console.log("i am here");
     return fetch(url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: "input1=".concat(encodeURIComponent(appointmentName.value), "&input2=").concat(encodeURIComponent(appointmentDate.value), "&input3=").concat(encodeURIComponent(appointmentTime.value), "&input4=").concat(encodeURIComponent(appointmentComment.value))
+        body: "input1=".concat(encodeURIComponent(appointmentName.value), "&input2=").concat(encodeURIComponent(appointmentDate.value), "&input3=").concat(encodeURIComponent(appointmentTime.value), "&input4=").concat(encodeURIComponent(appointmentComment.value), "&input5=").concat(encodeURIComponent(appointmentID))
     })
         .then(function (response) { return response.text(); })
         .then(function (data) {
@@ -152,16 +150,6 @@ function loadVoteModal(id) {
     appointmentExpire.value = data[id].date;
     appointmentID = data[id].Appo_ID;
     appointmentName.value;
-    console.log(appointmentID);
-    appointmentSave === null || appointmentSave === void 0 ? void 0 : appointmentSave.addEventListener('click', function () {
-        sendDataVote('../backend/logic/votecreation.php')
-            .then(function () {
-            clearNew();
-        })
-            .catch(function (error) {
-            console.error('Error sending data:', error);
-        });
-    });
     /*
     send data with these four variables:
     appointmentName
@@ -170,6 +158,15 @@ function loadVoteModal(id) {
     appointmentComment
     */
 }
+appointmentSave === null || appointmentSave === void 0 ? void 0 : appointmentSave.addEventListener('click', function () {
+    sendDataVote('../backend/logic/votecreation.php')
+        .then(function () {
+        clearNew();
+    })
+        .catch(function (error) {
+        console.error('Error sending data:', error);
+    });
+});
 newSave === null || newSave === void 0 ? void 0 : newSave.addEventListener('click', function () {
     if (canSave()) {
         sendDataAppo('../backend/logic/appocreation.php')
@@ -185,27 +182,30 @@ newSave === null || newSave === void 0 ? void 0 : newSave.addEventListener('clic
         alert('Please fill out all fields before saving!');
     }
 });
+/*
 <<<<<<< HEAD
 =======
-appointmentSave === null || appointmentSave === void 0 ? void 0 : appointmentSave.addEventListener('click', function () {
+appointmentSave?.addEventListener('click', () => {
     if (canSaveAppointment()) {
         sendDataAppo('../backend/logic/appocreation.php')
-            .then(function () {
-            clearAppointment();
-            refreshPage();
-        })
-            .catch(function (error) {
-            console.error('Error sending data:', error);
-        });
+            .then(() => {
+                clearAppointment();
+                refreshPage();
+            })
+            .catch(error => {
+                console.error('Error sending data:', error);
+            });
+    } else {
+        alert('Please fill out all fields before saving!')
     }
-    else {
-        alert('Please fill out all fields before saving!');
-    }
-});
-appointmentClose === null || appointmentClose === void 0 ? void 0 : appointmentClose.addEventListener('click', function () {
+})
+
+appointmentClose?.addEventListener('click', () => {
     clearAppointment();
-});
+})
+
 >>>>>>> 3d1599435629137e91599bfd955a7e86cc47ff2a
+*/
 list === null || list === void 0 ? void 0 : list.addEventListener("click", function (event) {
     var target = event.target;
     var li = target;

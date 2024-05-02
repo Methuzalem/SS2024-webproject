@@ -139,7 +139,7 @@ function sendDataVote(url: string)
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: `input1=${encodeURIComponent(appointmentName.value)}&input2=${encodeURIComponent(appointmentDate.value)}&input3=${encodeURIComponent(appointmentTime.value)}&input4=${encodeURIComponent(appointmentComment.value)}`
+        body: `input1=${encodeURIComponent(appointmentName.value)}&input2=${encodeURIComponent(appointmentDate.value)}&input3=${encodeURIComponent(appointmentTime.value)}&input4=${encodeURIComponent(appointmentComment.value)}&input5=${encodeURIComponent(appointmentID)}`
     })
     .then(response => response.text())
     .then(data => {
@@ -191,18 +191,10 @@ function loadVoteModal(id: number)
     appointmentID = data[id].Appo_ID;
     appointmentName.value 
 
-    console.log(appointmentID);
+
 
     
-    appointmentSave?.addEventListener('click', () => {
-            sendDataVote('../backend/logic/votecreation.php')
-                .then(() => {
-                    clearNew();
-                })
-                .catch(error => {
-                    console.error('Error sending data:', error);
-                });
-    })
+
     /*
     send data with these four variables:
     appointmentName
@@ -211,6 +203,18 @@ function loadVoteModal(id: number)
     appointmentComment
     */
 }
+
+appointmentSave?.addEventListener('click', () => {
+    sendDataVote('../backend/logic/votecreation.php')
+        .then(() => {
+            clearNew();
+        })
+        .catch(error => {
+            console.error('Error sending data:', error);
+        });
+        
+})
+
 
 newSave?.addEventListener('click', () => {
     if (canSave()) {
@@ -226,7 +230,7 @@ newSave?.addEventListener('click', () => {
         alert('Please fill out all fields before saving!')
     }
 })
-
+/*
 <<<<<<< HEAD
 =======
 appointmentSave?.addEventListener('click', () => {
@@ -249,6 +253,7 @@ appointmentClose?.addEventListener('click', () => {
 })
 
 >>>>>>> 3d1599435629137e91599bfd955a7e86cc47ff2a
+*/
 list?.addEventListener("click", function(event){
     const target = event.target as HTMLElement;
     let li = target;

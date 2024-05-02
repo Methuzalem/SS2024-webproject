@@ -8,6 +8,7 @@ $date = $_POST['input2'] ?? '';
 $time = $_POST['input3'] ?? '';
 $duration = $_POST['input4'] ?? '';
 $location = $_POST['input5'] ?? '';
+$isOption = "1";
 
 //INSERT appointment statement
 $AppoSql = "INSERT INTO appointments (title, duration, location) VALUES (?, ?, ?)";
@@ -37,9 +38,9 @@ if ($result->num_rows > 0) {
 }
 
 //INSERT date statement
-$DateSql = "INSERT INTO date (date, beginn, appointment) VALUES (?, ?, ?)";
+$DateSql = "INSERT INTO date (date, beginn, appointment, isOption) VALUES (?, ?, ?, ?)";
 $stmt = $conn->prepare($DateSql);
-$stmt->bind_param("sss", $date, $time, $appoID);
+$stmt->bind_param("sssi", $date, $time, $appoID, $isOption);
 $stmt->execute();
 $stmt->close();
 
