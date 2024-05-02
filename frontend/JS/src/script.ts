@@ -46,9 +46,13 @@ function clearNew()
 function clearAppointment()
 {
     appointmentName.value = "";
-    appointmentDate.value = "";
     appointmentTime.value = "";
     appointmentComment.value = "";
+    const options = appointmentDate.querySelectorAll("option");
+    for(let i = 1; i < options.length; i++)
+    {
+        appointmentDate.removeChild(options[i]);
+    }
 }
 
 function appendAppointments(data: any)
@@ -178,6 +182,23 @@ function canSaveAppointment(): boolean {
            appointmentComment.value.trim() !== "";
 }
 
+function generateAppointmentOptions(fetchedData: any[], id: number)
+{
+    for(let i = 0; i < fetchedData.length; i++)
+    {
+        if(fetchedData[i].isOption == 1)
+        {
+            if(fetchedData[i].appointment == data[id].Appo_ID)
+            {
+                let option = document.createElement("option");
+                option.setAttribute("value", i.toString());
+                option.innerHTML = fetchedData[i].date;
+                appointmentDate.appendChild(option);
+            }
+        }
+    }
+}
+
 function loadExpireModal(id: number)
 {
     expiredTitle.innerHTML = data[id].title;
@@ -195,7 +216,24 @@ function loadVoteModal(id: number)
 
     appointmentID = data[id].Appo_ID;
 
+    fetch("../backend/JSON/Date.json")
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Netzwerkantwort war nicht ok");
+        }
+        return response.json();
+    })
+    .then(fetchedData => {
+        generateAppointmentOptions(fetchedData, id);
+    })
+    .catch(error => {
+        console.error("Fehler beim Laden der JSON-Datei:", error);
+    });
 }
+
+appointmentClose?.addEventListener('click', () => {
+    clearAppointment();
+})
 
 appointmentSave?.addEventListener('click', () => {
     sendDataVote('../backend/logic/votecreation.php')
@@ -205,7 +243,7 @@ appointmentSave?.addEventListener('click', () => {
         .catch(error => {
             console.error('Error sending data:', error);
         });
-        
+    clearAppointment();
 })
 
 newSave?.addEventListener('click', () => {

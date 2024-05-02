@@ -1,3 +1,4 @@
+"use strict";
 var newClose = document.getElementById("newClose");
 var newSave = document.getElementById("newSave");
 var addDate = document.getElementById("addDate");
@@ -35,9 +36,12 @@ function clearNew() {
 }
 function clearAppointment() {
     appointmentName.value = "";
-    appointmentDate.value = "";
     appointmentTime.value = "";
     appointmentComment.value = "";
+    var options = appointmentDate.querySelectorAll("option");
+    for (var i = 1; i < options.length; i++) {
+        appointmentDate.removeChild(options[i]);
+    }
 }
 function appendAppointments(data) {
     for (var i = 0; i < data.length; i++) {
@@ -142,6 +146,18 @@ function canSaveAppointment() {
         appointmentTime.value.trim() !== "" &&
         appointmentComment.value.trim() !== "";
 }
+function generateAppointmentOptions(fetchedData, id) {
+    for (var i = 0; i < fetchedData.length; i++) {
+        if (fetchedData[i].isOption == 1) {
+            if (fetchedData[i].appointment == data[id].Appo_ID) {
+                var option = document.createElement("option");
+                option.setAttribute("value", i.toString());
+                option.innerHTML = fetchedData[i].date;
+                appointmentDate.appendChild(option);
+            }
+        }
+    }
+}
 function loadExpireModal(id) {
     expiredTitle.innerHTML = data[id].title;
     expiredDuration.value = data[id].duration;
@@ -154,7 +170,23 @@ function loadVoteModal(id) {
     appointmentLocation.value = data[id].location;
     appointmentExpire.value = data[id].expireDate;
     appointmentID = data[id].Appo_ID;
+    fetch("../backend/JSON/Date.json")
+        .then(function (response) {
+        if (!response.ok) {
+            throw new Error("Netzwerkantwort war nicht ok");
+        }
+        return response.json();
+    })
+        .then(function (fetchedData) {
+        generateAppointmentOptions(fetchedData, id);
+    })
+        .catch(function (error) {
+        console.error("Fehler beim Laden der JSON-Datei:", error);
+    });
 }
+appointmentClose === null || appointmentClose === void 0 ? void 0 : appointmentClose.addEventListener('click', function () {
+    clearAppointment();
+});
 appointmentSave === null || appointmentSave === void 0 ? void 0 : appointmentSave.addEventListener('click', function () {
     sendDataVote('../backend/logic/votecreation.php')
         .then(function () {
@@ -163,6 +195,7 @@ appointmentSave === null || appointmentSave === void 0 ? void 0 : appointmentSav
         .catch(function (error) {
         console.error('Error sending data:', error);
     });
+    clearAppointment();
 });
 newSave === null || newSave === void 0 ? void 0 : newSave.addEventListener('click', function () {
     if (canSave()) {

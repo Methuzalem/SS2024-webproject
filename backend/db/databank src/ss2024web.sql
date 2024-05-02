@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 02. Mai 2024 um 01:25
+-- Erstellungszeit: 02. Mai 2024 um 22:27
 -- Server-Version: 10.4.28-MariaDB
 -- PHP-Version: 8.2.4
 
@@ -30,6 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `appointments` (
   `Appo_ID` int(11) NOT NULL,
   `title` varchar(64) NOT NULL,
+  `expireDate` date NOT NULL,
   `duration` int(12) NOT NULL,
   `location` varchar(64) NOT NULL,
   `expired` tinyint(1) NOT NULL
@@ -39,8 +40,9 @@ CREATE TABLE `appointments` (
 -- Daten für Tabelle `appointments`
 --
 
-INSERT INTO `appointments` (`Appo_ID`, `title`, `duration`, `location`, `expired`) VALUES
-(39, 'Marvin', 6, 'Malediven', 0);
+INSERT INTO `appointments` (`Appo_ID`, `title`, `expireDate`, `duration`, `location`, `expired`) VALUES
+(89, 'Bianca', '4099-09-15', 6, 'Biancas Place', 0),
+(90, 'Marvins Erfolg', '2024-05-06', 4, 'Marvins Place', 0);
 
 -- --------------------------------------------------------
 
@@ -52,15 +54,19 @@ CREATE TABLE `date` (
   `date_ID` int(11) NOT NULL,
   `date` date NOT NULL,
   `beginn` time NOT NULL,
-  `appointment` int(11) NOT NULL
+  `appointment` int(11) NOT NULL,
+  `isOption` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Daten für Tabelle `date`
 --
 
-INSERT INTO `date` (`date_ID`, `date`, `beginn`, `appointment`) VALUES
-(26, '1222-12-12', '09:08:00', 39);
+INSERT INTO `date` (`date_ID`, `date`, `beginn`, `appointment`, `isOption`) VALUES
+(71, '1995-09-15', '20:00:00', 89, 1),
+(72, '2024-05-03', '20:00:00', 90, 1),
+(73, '2024-05-04', '20:00:00', 90, 1),
+(74, '2024-05-05', '20:00:00', 90, 1);
 
 -- --------------------------------------------------------
 
@@ -81,7 +87,7 @@ CREATE TABLE `votes` (
 --
 
 INSERT INTO `votes` (`vote_ID`, `username`, `comment`, `date`, `appointment`) VALUES
-(2, 'Marvin', 'This is the inital comment', 26, 39);
+(3, 'Marvin', 'This is the inital comment', 71, 89);
 
 --
 -- Indizes der exportierten Tabellen
@@ -116,19 +122,19 @@ ALTER TABLE `votes`
 -- AUTO_INCREMENT für Tabelle `appointments`
 --
 ALTER TABLE `appointments`
-  MODIFY `Appo_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `Appo_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 
 --
 -- AUTO_INCREMENT für Tabelle `date`
 --
 ALTER TABLE `date`
-  MODIFY `date_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `date_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT für Tabelle `votes`
 --
 ALTER TABLE `votes`
-  MODIFY `vote_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `vote_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints der exportierten Tabellen
