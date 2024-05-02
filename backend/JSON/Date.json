@@ -3,36 +3,49 @@
         "date_ID": "26",
         "date": "1222-12-12",
         "beginn": "09:08:00",
-        "appointment": "39"
+        "appointment": "39",
+        "isOption": "0"
     },
     {
-        "date_ID": "40",
-        "date": "1111-11-11",
-        "beginn": "11:11:00",
-        "appointment": "53"
-    },
-    {
-        "date_ID": "41",
+        "date_ID": "46",
         "date": "0002-02-02",
+        "beginn": "22:22:00",
+        "appointment": "59",
+        "isOption": "0"
+    },
+    {
+        "date_ID": "47",
+        "date": "0002-02-12",
         "beginn": "02:02:00",
-        "appointment": "54"
+        "appointment": "60",
+        "isOption": "0"
     },
     {
-        "date_ID": "42",
-        "date": "1111-01-01",
+        "date_ID": "48",
+        "date": "0112-02-12",
+        "beginn": "21:12:00",
+        "appointment": "61",
+        "isOption": "0"
+    },
+    {
+        "date_ID": "49",
+        "date": "0111-11-12",
         "beginn": "01:01:00",
-        "appointment": "55"
+        "appointment": "62",
+        "isOption": "0"
     },
     {
-        "date_ID": "43",
+        "date_ID": "50",
         "date": "0001-01-01",
         "beginn": "01:01:00",
-        "appointment": "56"
+        "appointment": "63",
+        "isOption": "0"
     },
     {
-        "date_ID": "44",
-        "date": "0001-01-01",
-        "beginn": "01:01:00",
-        "appointment": "57"
+        "date_ID": "51",
+        "date": "0121-02-01",
+        "beginn": "12:12:00",
+        "appointment": "64",
+        "isOption": "0"
     }
 ]

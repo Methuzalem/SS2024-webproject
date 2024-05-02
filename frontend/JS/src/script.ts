@@ -8,6 +8,7 @@ const newTime     = document.getElementById("newTime")     as HTMLInputElement;
 const newDuration = document.getElementById("newDuration") as HTMLInputElement;
 const newLocation = document.getElementById("newLocation") as HTMLInputElement;
 
+let appointmentID = "";
 const appointmentTitle    = document.getElementById("appointmentTitle")    as HTMLInputElement;
 const appointmentDuration = document.getElementById("appointmentDuration") as HTMLInputElement;
 const appointmentLocation = document.getElementById("appointmentLocation") as HTMLInputElement;
@@ -114,12 +115,29 @@ function sendDataAppo(url: string)
     });
 }
 
+function sendDataVote(url: string)
+{
+    return fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `input1=${encodeURIComponent(appointmentName.value)}&input2=${encodeURIComponent(appointmentDate.value)}&input3=${encodeURIComponent(appointmentTime.value)}&input4=${encodeURIComponent(appointmentComment.value)}`
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log('Server Response:', data);
+    })
+    .catch(error => {
+        console.error('Error sending data:', error);
+    });
+}
+
 newClose?.addEventListener("click", () => {
     clearNew();
 })
 
 function refreshPage(): void {
-    window.location.href = window.location.pathname + window.location.search + '#';
     window.location.reload();
 }
 
@@ -137,6 +155,22 @@ function loadModal(id: number)
     appointmentDuration.value  = data[id].duration;
     appointmentLocation.value  = data[id].location;
     appointmentExpire.value    = data[id].date;
+
+    appointmentID = data[id].Appo_ID;
+    appointmentName.value 
+
+    console.log(appointmentID);
+
+    
+    appointmentSave?.addEventListener('click', () => {
+            sendDataVote('../backend/logic/votecreation.php')
+                .then(() => {
+                    clearNew();
+                })
+                .catch(error => {
+                    console.error('Error sending data:', error);
+                });
+    })
     /*
     send data with these four variables:
     appointmentName
@@ -147,21 +181,6 @@ function loadModal(id: number)
 }
 
 newSave?.addEventListener('click', () => {
-    if (canSave()) {
-        sendDataAppo('../backend/logic/appocreation.php')
-            .then(() => {
-                clearNew();
-                refreshPage(); 
-            })
-            .catch(error => {
-                console.error('Error sending data:', error);
-            });
-    } else {
-        alert('Please fill out all fields before saving!')
-    }
-})
-
-appointmentSave?.addEventListener('click', () => {
     if (canSave()) {
         sendDataAppo('../backend/logic/appocreation.php')
             .then(() => {
