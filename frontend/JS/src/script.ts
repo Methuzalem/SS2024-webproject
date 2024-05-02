@@ -32,7 +32,6 @@ const list = document.getElementById("list") as HTMLDataListElement;
 var data : any[];
 var dates : string[] = [];
 
-
 function clearNew()
 {
     newTitle.value = "";
@@ -194,7 +193,6 @@ function loadVoteModal(id: number)
     appointmentExpire.value    = data[id].expireDate;
 
     appointmentID = data[id].Appo_ID;
-
 }
 
 appointmentSave?.addEventListener('click', () => {
