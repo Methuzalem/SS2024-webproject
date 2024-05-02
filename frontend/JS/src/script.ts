@@ -32,6 +32,15 @@ const list = document.getElementById("list") as HTMLDataListElement;
 var data : any[];
 var dates : string[] = [];
 
+function clearList()
+{
+    let elements = list.querySelectorAll("li");
+    for(let i = 0; i < elements.length; i++)
+    {
+        list.removeChild(elements[i]);
+    }
+}
+
 function clearNew()
 {
     newTitle.value = "";
@@ -56,6 +65,7 @@ function clearAppointment()
 
 function appendAppointments(data: any)
 {
+    clearList();
     for(let i = 0; i < data.length; i++)
     {
         let li = document.createElement("li");
@@ -214,7 +224,6 @@ function loadVoteModal(id: number)
     appointmentExpire.value    = data[id].expireDate;
 
     appointmentID = data[id].Appo_ID;
-<<<<<<< HEAD
 
     fetch("../backend/JSON/Date.json")
     .then(response => {
@@ -229,8 +238,6 @@ function loadVoteModal(id: number)
     .catch(error => {
         console.error("Fehler beim Laden der JSON-Datei:", error);
     });
-=======
->>>>>>> a425e250eb490a3fb86257ebacce754d02172a01
 }
 
 appointmentClose?.addEventListener('click', () => {

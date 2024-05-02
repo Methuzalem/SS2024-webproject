@@ -26,6 +26,12 @@ var expiredExpire = document.getElementById("expiredExpire");
 var list = document.getElementById("list");
 var data;
 var dates = [];
+function clearList() {
+    var elements = list.querySelectorAll("li");
+    for (var i = 0; i < elements.length; i++) {
+        list.removeChild(elements[i]);
+    }
+}
 function clearNew() {
     newTitle.value = "";
     newDate.value = "";
@@ -44,6 +50,7 @@ function clearAppointment() {
     }
 }
 function appendAppointments(data) {
+    clearList();
     for (var i = 0; i < data.length; i++) {
         var li = document.createElement("li");
         li.setAttribute("id", i.toString());
