@@ -73,15 +73,15 @@
                         <div class="modal-body">
                             <div>
                                 <label for="appointmentDuration" class="form-label thickLabel">Duration</label>
-                                <input readonly type="time" id="appointmentDuration" class="form-control border-dark">
+                                <input readonly type="time" id="appointmentDuration" class="form-control-plaintext">
                             </div>
                             <div>
                                 <label for="appointmentLocation" class="form-label thickLabel">Location</label>
-                                <input readonly type="text" id="appointmentLocation" class="form-control border-dark">
+                                <input readonly type="text" id="appointmentLocation" class="form-control-plaintext">
                             </div>
                             <div>
                                 <label for="appointmentExpire" class="form-label thickLabel">Expire</label>
-                                <input readonly type="date" id="appointmentExpire" class="form-control border-dark">
+                                <input readonly type="date" id="appointmentExpire" class="form-control-plaintext">
                             </div>
                             <div>
                                 <label for="appointmentName" class="form-label thickLabel">Name</label>
@@ -103,6 +103,33 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="appointmentClose">Close</button>
                             <button type="button" class="btn btn-dark" data-bs-dismiss="modal" id="appointmentSave">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="expiredModal" tabindex="-1" aria-labelledby="expiredTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header" id="modalHeader">
+                            <h5 class="modal-title" id="expiredTitle">Title</h5>
+                        </div>
+                        <div class="modal-body">
+                            <div>
+                                <label for="expiredDuration" class="form-label thickLabel">Duration</label>
+                                <input readonly type="time" id="expiredDuration" class="form-control-plaintext">
+                            </div>
+                            <div>
+                                <label for="expiredLocation" class="form-label thickLabel">Location</label>
+                                <input readonly type="text" id="expiredLocation" class="form-control-plaintext">
+                            </div>
+                            <div>
+                                <label for="expiredExpire" class="form-label thickLabel">Expire</label>
+                                <input readonly type="date" id="expiredExpire" class="form-control-plaintext">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="expiredClose">Close</button>
                         </div>
                     </div>
                 </div>

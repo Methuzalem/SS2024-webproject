@@ -1,6 +1,8 @@
 const newClose = document.getElementById("newClose") as HTMLInputElement;
 const newSave  = document.getElementById("newSave")  as HTMLInputElement;
-const appointmentSave = document.getElementById("appointmentSave") as HTMLInputElement;
+
+const appointmentClose = document.getElementById("appointmentClose") as HTMLInputElement;
+const appointmentSave  = document.getElementById("appointmentSave")  as HTMLInputElement;
 
 const newTitle    = document.getElementById("newTitle")    as HTMLInputElement;
 const newExpire   = document.getElementById("newExpire")     as HTMLInputElement;
@@ -18,6 +20,12 @@ const appointmentDate     = document.getElementById("appointmentDate")     as HT
 const appointmentTime     = document.getElementById("appointmentTime")     as HTMLInputElement;
 const appointmentComment  = document.getElementById("appointmentComment")  as HTMLInputElement;
 
+const expiredTitle    = document.getElementById("expiredTitle") as HTMLInputElement;
+const expiredDuration = document.getElementById("expiredTitle") as HTMLInputElement;
+const expiredLocation = document.getElementById("expiredTitle") as HTMLInputElement;
+const expiredExpire   = document.getElementById("expiredTitle") as HTMLInputElement;
+
+
 const list = document.getElementById("list") as HTMLDataListElement;
 
 var data : any[];
@@ -29,6 +37,14 @@ function clearNew()
     newExpire.value = "";
     newTime.value = "";
     newLocation.value = "";
+}
+
+function clearAppointment()
+{
+    appointmentName.value = "";
+    appointmentDate.value = "";
+    appointmentTime.value = "";
+    appointmentComment.value = "";
 }
 
 function appendAppointments(data: any)
@@ -73,6 +89,7 @@ function appendAppointments(data: any)
         else
         {
             li.setAttribute("class", "list-group-item border-dark bg-secondary");
+            li.setAttribute("data-bs-target", "#expiredModal");
         }
 
         list.appendChild(li);
@@ -149,7 +166,22 @@ function canSave(): boolean {
            newLocation.value.trim() !== "";
 }
 
-function loadModal(id: number)
+function canSaveAppointment(): boolean {
+    return appointmentName.value.trim() !== "" &&
+           appointmentDate.value.trim() !== "" &&
+           appointmentTime.value.trim() !== "" &&
+           appointmentComment.value.trim() !== "";
+}
+
+function loadExpireModal(id: number)
+{
+    expiredTitle.innerHTML = data[id].title;
+    expiredDuration.value  = data[id].duration;
+    expiredLocation.value  = data[id].location;
+    expiredExpire.value    = data[id].date;
+}
+
+function loadVoteModal(id: number)
 {
     appointmentTitle.innerHTML = data[id].title;
     appointmentDuration.value  = data[id].duration;
@@ -195,6 +227,28 @@ newSave?.addEventListener('click', () => {
     }
 })
 
+<<<<<<< HEAD
+=======
+appointmentSave?.addEventListener('click', () => {
+    if (canSaveAppointment()) {
+        sendDataAppo('../backend/logic/appocreation.php')
+            .then(() => {
+                clearAppointment();
+                refreshPage();
+            })
+            .catch(error => {
+                console.error('Error sending data:', error);
+            });
+    } else {
+        alert('Please fill out all fields before saving!')
+    }
+})
+
+appointmentClose?.addEventListener('click', () => {
+    clearAppointment();
+})
+
+>>>>>>> 3d1599435629137e91599bfd955a7e86cc47ff2a
 list?.addEventListener("click", function(event){
     const target = event.target as HTMLElement;
     let li = target;
@@ -206,7 +260,10 @@ list?.addEventListener("click", function(event){
     const id = li.getAttribute('id');
     if(id)
     {
-        loadModal(parseInt(id));
+        if(data[parseInt(id)].expired == 1)
+            loadExpireModal(parseInt(id));
+        else
+            loadVoteModal(parseInt(id));
     }
 })
 
