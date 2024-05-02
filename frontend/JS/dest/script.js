@@ -1,6 +1,6 @@
-"use strict";
 var newClose = document.getElementById("newClose");
 var newSave = document.getElementById("newSave");
+var appointmentSave = document.getElementById("appointmentSave");
 var newTitle = document.getElementById("newTitle");
 var newExpire = document.getElementById("newExpire");
 var newTime = document.getElementById("newTime");
@@ -73,7 +73,7 @@ function fetchData(url) {
         console.error("Fehler beim Laden der JSON-Datei:", error);
     });
 }
-function sendData(url) {
+function sendDataAppo(url) {
     return fetch(url, {
         method: 'POST',
         headers: {
@@ -118,7 +118,22 @@ function loadModal(id) {
 }
 newSave === null || newSave === void 0 ? void 0 : newSave.addEventListener('click', function () {
     if (canSave()) {
-        sendData('../backend/logic/appocreation.php')
+        sendDataAppo('../backend/logic/appocreation.php')
+            .then(function () {
+            clearNew();
+            refreshPage();
+        })
+            .catch(function (error) {
+            console.error('Error sending data:', error);
+        });
+    }
+    else {
+        alert('Please fill out all fields before saving!');
+    }
+});
+appointmentSave === null || appointmentSave === void 0 ? void 0 : appointmentSave.addEventListener('click', function () {
+    if (canSave()) {
+        sendDataAppo('../backend/logic/appocreation.php')
             .then(function () {
             clearNew();
             refreshPage();

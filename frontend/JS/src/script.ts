@@ -1,5 +1,6 @@
 const newClose = document.getElementById("newClose") as HTMLInputElement;
 const newSave  = document.getElementById("newSave")  as HTMLInputElement;
+const appointmentSave = document.getElementById("appointmentSave") as HTMLInputElement;
 
 const newTitle    = document.getElementById("newTitle")    as HTMLInputElement;
 const newExpire   = document.getElementById("newExpire")     as HTMLInputElement;
@@ -95,7 +96,7 @@ function fetchData(url: string) : any
     });
 }
 
-function sendData(url: string)
+function sendDataAppo(url: string)
 {
     return fetch(url, {
         method: 'POST',
@@ -147,7 +148,22 @@ function loadModal(id: number)
 
 newSave?.addEventListener('click', () => {
     if (canSave()) {
-        sendData('../backend/logic/appocreation.php')
+        sendDataAppo('../backend/logic/appocreation.php')
+            .then(() => {
+                clearNew();
+                refreshPage(); 
+            })
+            .catch(error => {
+                console.error('Error sending data:', error);
+            });
+    } else {
+        alert('Please fill out all fields before saving!')
+    }
+})
+
+appointmentSave?.addEventListener('click', () => {
+    if (canSave()) {
+        sendDataAppo('../backend/logic/appocreation.php')
             .then(() => {
                 clearNew();
                 refreshPage(); 
