@@ -1,11 +1,13 @@
 const newClose = document.getElementById("newClose") as HTMLInputElement;
 const newSave  = document.getElementById("newSave")  as HTMLInputElement;
+const addDate  = document.getElementById("addDate")  as HTMLInputElement;
 
 const appointmentClose = document.getElementById("appointmentClose") as HTMLInputElement;
 const appointmentSave  = document.getElementById("appointmentSave")  as HTMLInputElement;
 
 const newTitle    = document.getElementById("newTitle")    as HTMLInputElement;
-const newExpire   = document.getElementById("newExpire")     as HTMLInputElement;
+const newDate     = document.getElementById("newDate")     as HTMLInputElement;
+const newExpire   = document.getElementById("newExpire")   as HTMLInputElement;
 const newTime     = document.getElementById("newTime")     as HTMLInputElement;
 const newDuration = document.getElementById("newDuration") as HTMLInputElement;
 const newLocation = document.getElementById("newLocation") as HTMLInputElement;
@@ -21,18 +23,19 @@ const appointmentTime     = document.getElementById("appointmentTime")     as HT
 const appointmentComment  = document.getElementById("appointmentComment")  as HTMLInputElement;
 
 const expiredTitle    = document.getElementById("expiredTitle") as HTMLInputElement;
-const expiredDuration = document.getElementById("expiredTitle") as HTMLInputElement;
-const expiredLocation = document.getElementById("expiredTitle") as HTMLInputElement;
-const expiredExpire   = document.getElementById("expiredTitle") as HTMLInputElement;
-
+const expiredDuration = document.getElementById("expiredDuration") as HTMLInputElement;
+const expiredLocation = document.getElementById("expiredLocation") as HTMLInputElement;
+const expiredExpire   = document.getElementById("expiredExpire") as HTMLInputElement;
 
 const list = document.getElementById("list") as HTMLDataListElement;
 
 var data : any[];
+var dates : string[] = [];
 
 function clearNew()
 {
     newTitle.value = "";
+    newDate.value = "";
     newDuration.value = "";
     newExpire.value = "";
     newTime.value = "";
@@ -227,28 +230,15 @@ newSave?.addEventListener('click', () => {
     }
 })
 
-<<<<<<< HEAD
-=======
-appointmentSave?.addEventListener('click', () => {
-    if (canSaveAppointment()) {
-        sendDataAppo('../backend/logic/appocreation.php')
-            .then(() => {
-                clearAppointment();
-                refreshPage();
-            })
-            .catch(error => {
-                console.error('Error sending data:', error);
-            });
-    } else {
-        alert('Please fill out all fields before saving!')
+addDate?.addEventListener("click", function(){
+    if(newDate.value != "")
+    {
+        dates.push(newDate.value);
     }
+    console.log(dates);
+    newDate.value = "";
 })
 
-appointmentClose?.addEventListener('click', () => {
-    clearAppointment();
-})
-
->>>>>>> 3d1599435629137e91599bfd955a7e86cc47ff2a
 list?.addEventListener("click", function(event){
     const target = event.target as HTMLElement;
     let li = target;

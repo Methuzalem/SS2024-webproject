@@ -40,6 +40,11 @@
                                 <input type="text" id="newTitle" class="form-control border-dark">
                             </div>
                             <div>
+                                <label for="newDate" class="form-label thickLabel">Add dates</label>
+                                <input type="date" id="newDate" class="form-control border-dark mb-1">
+                                <button id="addDate" class="btn btn-dark">Add date</button>
+                            </div>
+                            <div>
                                 <label for="newExpire" class="form-label thickLabel">Expire date</label>
                                 <input type="date" id="newExpire" class="form-control border-dark">
                             </div>
@@ -72,8 +77,8 @@
                         </div>
                         <div class="modal-body">
                             <div>
-                                <label for="appointmentDuration" class="form-label thickLabel">Duration</label>
-                                <input readonly type="time" id="appointmentDuration" class="form-control-plaintext">
+                                <label for="appointmentDuration" class="form-label thickLabel">Duration(in hours)</label>
+                                <input readonly type="text" id="appointmentDuration" class="form-control-plaintext">
                             </div>
                             <div>
                                 <label for="appointmentLocation" class="form-label thickLabel">Location</label>
@@ -81,7 +86,7 @@
                             </div>
                             <div>
                                 <label for="appointmentExpire" class="form-label thickLabel">Expire</label>
-                                <input readonly type="date" id="appointmentExpire" class="form-control-plaintext">
+                                <input readonly type="text" id="appointmentExpire" class="form-control-plaintext">
                             </div>
                             <div>
                                 <label for="appointmentName" class="form-label thickLabel">Name</label>
@@ -116,8 +121,8 @@
                         </div>
                         <div class="modal-body">
                             <div>
-                                <label for="expiredDuration" class="form-label thickLabel">Duration</label>
-                                <input readonly type="time" id="expiredDuration" class="form-control-plaintext">
+                                <label for="expiredDuration" class="form-label thickLabel">Duration(in hours)</label>
+                                <input readonly type="text" id="expiredDuration" class="form-control-plaintext">
                             </div>
                             <div>
                                 <label for="expiredLocation" class="form-label thickLabel">Location</label>
@@ -125,7 +130,7 @@
                             </div>
                             <div>
                                 <label for="expiredExpire" class="form-label thickLabel">Expire</label>
-                                <input readonly type="date" id="expiredExpire" class="form-control-plaintext">
+                                <input readonly type="text" id="expiredExpire" class="form-control-plaintext">
                             </div>
                         </div>
                         <div class="modal-footer">

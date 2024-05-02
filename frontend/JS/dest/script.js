@@ -1,9 +1,11 @@
 "use strict";
 var newClose = document.getElementById("newClose");
 var newSave = document.getElementById("newSave");
+var addDate = document.getElementById("addDate");
 var appointmentClose = document.getElementById("appointmentClose");
 var appointmentSave = document.getElementById("appointmentSave");
 var newTitle = document.getElementById("newTitle");
+var newDate = document.getElementById("newDate");
 var newExpire = document.getElementById("newExpire");
 var newTime = document.getElementById("newTime");
 var newDuration = document.getElementById("newDuration");
@@ -18,13 +20,15 @@ var appointmentDate = document.getElementById("appointmentDate");
 var appointmentTime = document.getElementById("appointmentTime");
 var appointmentComment = document.getElementById("appointmentComment");
 var expiredTitle = document.getElementById("expiredTitle");
-var expiredDuration = document.getElementById("expiredTitle");
-var expiredLocation = document.getElementById("expiredTitle");
-var expiredExpire = document.getElementById("expiredTitle");
+var expiredDuration = document.getElementById("expiredDuration");
+var expiredLocation = document.getElementById("expiredLocation");
+var expiredExpire = document.getElementById("expiredExpire");
 var list = document.getElementById("list");
 var data;
+var dates = [];
 function clearNew() {
     newTitle.value = "";
+    newDate.value = "";
     newDuration.value = "";
     newExpire.value = "";
     newTime.value = "";
@@ -104,7 +108,6 @@ function sendDataAppo(url) {
     });
 }
 function sendDataVote(url) {
-    console.log("i am here");
     return fetch(url, {
         method: 'POST',
         headers: {
@@ -185,27 +188,13 @@ newSave === null || newSave === void 0 ? void 0 : newSave.addEventListener('clic
         alert('Please fill out all fields before saving!');
     }
 });
-<<<<<<< HEAD
-=======
-appointmentSave === null || appointmentSave === void 0 ? void 0 : appointmentSave.addEventListener('click', function () {
-    if (canSaveAppointment()) {
-        sendDataAppo('../backend/logic/appocreation.php')
-            .then(function () {
-            clearAppointment();
-            refreshPage();
-        })
-            .catch(function (error) {
-            console.error('Error sending data:', error);
-        });
+addDate === null || addDate === void 0 ? void 0 : addDate.addEventListener("click", function () {
+    if (newDate.value != "") {
+        dates.push(newDate.value);
     }
-    else {
-        alert('Please fill out all fields before saving!');
-    }
+    console.log(dates);
+    newDate.value = "";
 });
-appointmentClose === null || appointmentClose === void 0 ? void 0 : appointmentClose.addEventListener('click', function () {
-    clearAppointment();
-});
->>>>>>> 3d1599435629137e91599bfd955a7e86cc47ff2a
 list === null || list === void 0 ? void 0 : list.addEventListener("click", function (event) {
     var target = event.target;
     var li = target;
