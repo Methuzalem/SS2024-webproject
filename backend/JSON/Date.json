@@ -47,5 +47,19 @@
         "beginn": "12:12:00",
         "appointment": "106",
         "isOption": "1"
+    },
+    {
+        "date_ID": "103",
+        "date": "2024-05-04",
+        "beginn": "12:12:00",
+        "appointment": "107",
+        "isOption": "1"
+    },
+    {
+        "date_ID": "104",
+        "date": "2024-05-05",
+        "beginn": "12:12:00",
+        "appointment": "107",
+        "isOption": "1"
     }
 ]
