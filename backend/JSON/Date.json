@@ -1,93 +1,51 @@
 [
     {
-        "date_ID": "71",
-        "date": "1995-09-15",
-        "beginn": "20:00:00",
-        "appointment": "89",
-        "isOption": "1"
-    },
-    {
-        "date_ID": "84",
-        "date": "2024-05-10",
+        "date_ID": "96",
+        "date": "2024-09-13",
         "beginn": "18:00:00",
-        "appointment": "94",
+        "appointment": "102",
         "isOption": "1"
     },
     {
-        "date_ID": "85",
-        "date": "2024-05-11",
+        "date_ID": "97",
+        "date": "2024-09-14",
         "beginn": "18:00:00",
-        "appointment": "94",
+        "appointment": "102",
         "isOption": "1"
     },
     {
-        "date_ID": "86",
-        "date": "2024-05-12",
+        "date_ID": "98",
+        "date": "2024-09-15",
         "beginn": "18:00:00",
-        "appointment": "94",
+        "appointment": "102",
         "isOption": "1"
     },
     {
-        "date_ID": "87",
-        "date": "2024-04-30",
-        "beginn": "12:12:00",
-        "appointment": "95",
-        "isOption": "1"
-    },
-    {
-        "date_ID": "88",
-        "date": "2024-05-03",
-        "beginn": "02:30:00",
-        "appointment": "96",
-        "isOption": "1"
-    },
-    {
-        "date_ID": "89",
+        "date_ID": "99",
         "date": "2024-05-04",
-        "beginn": "02:30:00",
-        "appointment": "96",
+        "beginn": "04:44:00",
+        "appointment": "103",
         "isOption": "1"
     },
     {
-        "date_ID": "90",
-        "date": "2024-05-05",
-        "beginn": "02:30:00",
-        "appointment": "96",
-        "isOption": "1"
-    },
-    {
-        "date_ID": "91",
-        "date": "2024-05-04",
-        "beginn": "12:12:00",
-        "appointment": "97",
-        "isOption": "1"
-    },
-    {
-        "date_ID": "92",
-        "date": "2024-05-05",
-        "beginn": "01:12:00",
-        "appointment": "98",
-        "isOption": "1"
-    },
-    {
-        "date_ID": "93",
+        "date_ID": "100",
         "date": "0000-00-00",
-        "beginn": "12:12:00",
-        "appointment": "99",
+        "beginn": "04:42:00",
+        "appointment": "104",
         "isOption": "1"
     },
     {
-        "date_ID": "94",
-        "date": "1212-12-12",
+        "date_ID": "101",
+        "date": "2024-05-04",
         "beginn": "12:12:00",
-        "appointment": "100",
+        "appointment": "105",
         "isOption": "1"
     },
     {
-        "date_ID": "95",
-        "date": "2024-05-12",
+        "date_ID": "102",
+        "date": "2024-05-04",
         "beginn": "12:12:00",
-        "appointment": "101",
+        "appointment": "106",
         "isOption": "1"
     }
 ]

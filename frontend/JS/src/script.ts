@@ -355,13 +355,22 @@ list?.addEventListener("click", function(event){
     }
 })
 
+let hasBeenCalled = false;
+
+function runOnce() {
+  if (!hasBeenCalled) {
+    refreshPage();
+    hasBeenCalled = true;
+  }
+}
+
 document.addEventListener('DOMContentLoaded', function (){ 
     compareDatesWithCurrent();
     fetch('../backend/servicehandler.php')
         .then(() => {
             fetchData("../backend/JSON/Appointments.json");
         });
-
+        
     //fix clicking outside modal box (delete values)
     var newAppointmentModal = document.getElementById('newAppointmentModal');
     var modalIsClosedByUser = true;

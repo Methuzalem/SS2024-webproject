@@ -349,6 +349,13 @@ list === null || list === void 0 ? void 0 : list.addEventListener("click", funct
             loadVoteModal(parseInt(id));
     }
 });
+var hasBeenCalled = false;
+function runOnce() {
+    if (!hasBeenCalled) {
+        refreshPage();
+        hasBeenCalled = true;
+    }
+}
 document.addEventListener('DOMContentLoaded', function () {
     compareDatesWithCurrent();
     fetch('../backend/servicehandler.php')

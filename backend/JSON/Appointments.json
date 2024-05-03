@@ -1,90 +1,42 @@
 [
     {
-        "Appo_ID": "89",
-        "title": "Steve",
-        "expireDate": "4099-09-15",
+        "Appo_ID": "102",
+        "title": "Biancas Geburtstag",
+        "expireDate": "2024-09-16",
         "duration": "6",
-        "location": "Biancas Place",
+        "location": "00",
         "expired": "0"
     },
     {
-        "Appo_ID": "89",
-        "title": "Bianca",
-        "expireDate": "4099-09-15",
-        "duration": "6",
-        "location": "Biancas Place",
-        "expired": "0"
-    },
-    {
-<<<<<<< HEAD
-        "Appo_ID": "94",
-        "title": "Christophs Geburtstag",
-        "expireDate": "2024-05-13",
-        "duration": "6",
-        "location": "Christoph zu Hause",
-        "expired": "0"
-    },
-    {
-        "Appo_ID": "95",
+        "Appo_ID": "103",
         "title": "Marvins Erfolg",
-        "expireDate": "2024-04-29",
-        "duration": "12",
-        "location": "121",
-        "expired": "1"
-    },
-    {
-        "Appo_ID": "96",
-        "title": "Marvin",
         "expireDate": "2024-05-01",
-        "duration": "2",
-        "location": "awdawd",
+        "duration": "5",
+        "location": "12",
         "expired": "1"
     },
     {
-        "Appo_ID": "97",
+        "Appo_ID": "104",
+        "title": "Marvins Erfolg",
+        "expireDate": "0000-00-00",
+        "duration": "4",
+        "location": "4242",
+        "expired": "0"
+    },
+    {
+        "Appo_ID": "105",
         "title": "awdawd",
-        "expireDate": "2024-05-01",
-        "duration": "12",
-        "location": "1212",
-        "expired": "1"
-    },
-    {
-        "Appo_ID": "98",
-        "title": "Marvins Erfolg",
-        "expireDate": "2024-05-01",
-        "duration": "12",
-        "location": "1212",
-        "expired": "1"
-    },
-    {
-        "Appo_ID": "99",
-        "title": "awd",
         "expireDate": "2024-04-30",
         "duration": "12",
-        "location": "121212",
+        "location": "1212",
         "expired": "1"
     },
     {
-        "Appo_ID": "100",
-        "title": "awdwad",
+        "Appo_ID": "106",
+        "title": "awd",
         "expireDate": "2024-04-29",
         "duration": "12",
-        "location": "121212",
+        "location": "1212",
         "expired": "1"
-    },
-    {
-        "Appo_ID": "101",
-        "title": "Marvins Erfolg",
-        "expireDate": "2024-05-13",
-        "duration": "12",
-        "location": "121212",
-=======
-        "Appo_ID": "89",
-        "title": "Kim",
-        "expireDate": "4099-09-15",
-        "duration": "6",
-        "location": "Biancas Place",
->>>>>>> 8ea93034c354096de3f2cdcece27a4f6d75fa85c
-        "expired": "0"
     }
 ]
