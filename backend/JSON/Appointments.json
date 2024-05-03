@@ -8,7 +8,27 @@
         "expired": "0"
     },
     {
+<<<<<<< HEAD
         "Appo_ID": "103",
+=======
+        "Appo_ID": "89",
+        "title": "Bianca",
+        "expireDate": "4099-09-15",
+        "duration": "6",
+        "location": "Biancas Place",
+        "expired": "0"
+    },
+    {
+        "Appo_ID": "94",
+        "title": "Christophs Geburtstag",
+        "expireDate": "2024-05-13",
+        "duration": "6",
+        "location": "Christoph zu Hause",
+        "expired": "0"
+    },
+    {
+        "Appo_ID": "95",
+>>>>>>> 1e8421092b2a591c53d4acaadec6234d67cf7465
         "title": "Marvins Erfolg",
         "expireDate": "2024-05-01",
         "duration": "5",
@@ -38,5 +58,16 @@
         "duration": "12",
         "location": "1212",
         "expired": "1"
+<<<<<<< HEAD
+=======
+    },
+    {
+        "Appo_ID": "101",
+        "title": "Marvins Erfolg",
+        "expireDate": "2024-05-13",
+        "duration": "12",
+        "location": "121212",
+        "expired": "0"
+>>>>>>> 1e8421092b2a591c53d4acaadec6234d67cf7465
     }
 ]
