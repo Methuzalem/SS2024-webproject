@@ -231,7 +231,7 @@ function loadExpireModal(id: number)
     expiredTitle.innerHTML = data[id].title;
     expiredDuration.value  = data[id].duration;
     expiredLocation.value  = data[id].location;
-    expiredExpire.value    = data[id].expireDate;
+    expiredExpire.value    = data[id].date;
 }
 
 function loadVoteModal(id: number)
