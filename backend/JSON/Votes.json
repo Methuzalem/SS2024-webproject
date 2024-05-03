@@ -5,5 +5,12 @@
         "comment": "This is the inital comment",
         "date": "71",
         "appointment": "89"
+    },
+    {
+        "vote_ID": "13",
+        "username": "Marvin",
+        "comment": "Ich kann leider nur so fr\u00fch!",
+        "date": "85",
+        "appointment": "94"
     }
 ]

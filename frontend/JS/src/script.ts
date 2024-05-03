@@ -18,7 +18,7 @@ const appointmentDuration = document.getElementById("appointmentDuration") as HT
 const appointmentLocation = document.getElementById("appointmentLocation") as HTMLInputElement;
 const appointmentExpire   = document.getElementById("appointmentExpire")   as HTMLInputElement;
 const appointmentName     = document.getElementById("appointmentName")     as HTMLInputElement;
-const appointmentDate     = document.getElementById("appointmentDate")     as HTMLInputElement;
+const appointmentDate     = document.getElementById("appointmentDate")     as HTMLSelectElement;
 const appointmentTime     = document.getElementById("appointmentTime")     as HTMLInputElement;
 const appointmentComment  = document.getElementById("appointmentComment")  as HTMLInputElement;
 
@@ -121,6 +121,58 @@ function fetchData(url: string) : any
     });
 }
 
+async function fetchexpireDates(url: string)
+{
+    try {
+        const response = await fetch(url);
+        const events = await response.json() as {Appo_ID: number, expireDate: string}[];
+        const expireDates = events.map(event => {
+            return { Appo_ID: event.Appo_ID, expireDate: event.expireDate };
+        });
+
+        console.log(expireDates); // Dies zeigt das Array der expireDates im Konsolenlog an
+        return expireDates;
+
+    } catch (error) {
+        console.error('Fehler beim Laden oder Verarbeiten der Daten:', error);
+        return [];
+    }
+}
+
+async function compareDatesWithCurrent() {
+    try {
+        let expireDates = await fetchexpireDates("../backend/JSON/Appointments.json");
+
+        const today = new Date();
+        today.setHours(0, 0, 0, 0); // Zeit auf Mitternacht setzen, um nur das Datum zu vergleichen
+
+        const pastDates = expireDates.filter(date => {
+            const compareDate = new Date(date.expireDate);
+            return compareDate < today;
+        });
+
+        // Vorbereiten der Daten zum Senden
+        const formData = new FormData();
+        pastDates.forEach(date => {
+            formData.append('appoIDs[]', date.Appo_ID.toString()); // Umwandlung der ID in einen String
+            formData.append('expireDates[]', date.expireDate); // Datum ist bereits ein String
+        });
+
+        // Senden der Daten an das PHP-Skript
+        const response = await fetch('../backend/logic/expire.php', {
+            method: 'POST',
+            body: formData
+        });
+
+        const responseText = await response.text(); // Nehmen Sie response.json() für JSON-Antwort
+        console.log('Response from server:', responseText);
+    } catch (error) {
+        console.error('Error in comparing dates or sending data:', error);
+    }
+}
+
+
+
 function sendDataAppo(url: string)
 {
     var datesString = dates.join(",");
@@ -142,12 +194,17 @@ function sendDataAppo(url: string)
 
 function sendDataVote(url: string)
 {
+
+    const selectedIndex = appointmentDate.selectedIndex;
+    const selectedOption = appointmentDate.options[selectedIndex]; 
+    const selectedText : any = selectedOption.textContent;
+
     return fetch(url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: `input1=${encodeURIComponent(appointmentName.value)}&input2=${encodeURIComponent(appointmentDate.value)}&input3=${encodeURIComponent(appointmentTime.value)}&input4=${encodeURIComponent(appointmentComment.value)}&input5=${encodeURIComponent(appointmentID)}`
+        body: `input1=${encodeURIComponent(appointmentName.value)}&input2=${encodeURIComponent(selectedText)}&input3=${encodeURIComponent(appointmentTime.value)}&input4=${encodeURIComponent(appointmentComment.value)}&input5=${encodeURIComponent(appointmentID)}`
     })
     .then(response => response.text())
     .then(data => {
@@ -191,6 +248,7 @@ function generateAppointmentOptions(fetchedData: any[], id: number)
             {
                 let option = document.createElement("option");
                 option.setAttribute("value", i.toString());
+                option.setAttribute("id", i.toString());
                 option.innerHTML = fetchedData[i].date;
                 appointmentDate.appendChild(option);
             }
@@ -203,7 +261,7 @@ function loadExpireModal(id: number)
     expiredTitle.innerHTML = data[id].title;
     expiredDuration.value  = data[id].duration;
     expiredLocation.value  = data[id].location;
-    expiredExpire.value    = data[id].date;
+    expiredExpire.value    = data[id].expireDate;
 }
 
 function loadVoteModal(id: number)
@@ -214,7 +272,6 @@ function loadVoteModal(id: number)
     appointmentExpire.value    = data[id].expireDate;
 
     appointmentID = data[id].Appo_ID;
-<<<<<<< HEAD
 
     fetch("../backend/JSON/Date.json")
     .then(response => {
@@ -229,8 +286,6 @@ function loadVoteModal(id: number)
     .catch(error => {
         console.error("Fehler beim Laden der JSON-Datei:", error);
     });
-=======
->>>>>>> a425e250eb490a3fb86257ebacce754d02172a01
 }
 
 appointmentClose?.addEventListener('click', () => {
@@ -291,6 +346,7 @@ list?.addEventListener("click", function(event){
 })
 
 document.addEventListener('DOMContentLoaded', function (){ 
+    compareDatesWithCurrent();
     fetch('../backend/servicehandler.php')
         .then(() => {
             fetchData("../backend/JSON/Appointments.json");
