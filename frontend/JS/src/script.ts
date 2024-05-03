@@ -32,6 +32,15 @@ const list = document.getElementById("list") as HTMLDataListElement;
 var data : any[];
 var dates : string[] = [];
 
+function clearList()
+{
+    let elements = list.querySelectorAll("li");
+    for(let i = 0; i < elements.length; i++)
+    {
+        list.removeChild(elements[i]);
+    }
+}
+
 function clearNew()
 {
     newTitle.value = "";
@@ -56,6 +65,7 @@ function clearAppointment()
 
 function appendAppointments(data: any)
 {
+    clearList();
     for(let i = 0; i < data.length; i++)
     {
         let li = document.createElement("li");
